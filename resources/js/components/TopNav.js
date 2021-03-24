@@ -1,23 +1,15 @@
-import React, { useContext } from "react";
-import {
-    Button,
-    Navbar,
-    Nav,
-    NavDropdown,
-    Form,
-    FormControl,
-} from "react-bootstrap";
+import React, { useContext, useState, createContext } from "react";
+import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../Hike";
 import Logout from "../pages/auth/Logout";
 
+// export const SearchContext = createContext(null);
+
 function User(props) {
     const user = useContext(UserContext);
 
-    // console.log("user data in User component", user);
-
     if (user) {
-        console.log(user);
         return (
             <>
                 <Nav.Link disabled>Hello, {user && user.username}</Nav.Link>
@@ -42,35 +34,77 @@ function User(props) {
     );
 }
 
-const TopNav = () => {
+const TopNav = (props) => {
+    console.log("file: TopNav.js  line 38  TopNav  props", props);
+    const user = useContext(UserContext);
+
+    const [items, setItems] = useState(null);
+    const [query, setQuery] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function searchEntities(event) {
+        event.preventDefault();
+
+        const url = `/api/entity/search/${query}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        setItems(data);
+        setIsLoading(false);
+        search(data);
+        // console.log(items);
+    }
+
+    const handleChange = (event) => {
+        // let value = event.target.value;
+        // console.log(value);
+        // setQuery(value);
+        props.search(event.target.value);
+    };
+
+    console.log(props.search);
+
     return (
-        <Navbar collapseOnSelect bg="light" expand="lg">
-            <Navbar.Brand href="/">HikeCzech</Navbar.Brand>
+        <Navbar collapseOnSelect bg="white" expand="lg" fixed="top">
+            <Navbar.Brand
+                href="/"
+                className="text-success
+			"
+            >
+                HikeCzech
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <LinkContainer to={"/map"}>
                         <Nav.Link>Map</Nav.Link>
                     </LinkContainer>
-                    <User />
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.2">
-                            Favourites
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="/submit">
-                            Contribute
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                    </NavDropdown>
+
+                    <LinkContainer to={"/submit"}>
+                        <Nav.Link>Contribute</Nav.Link>
+                    </LinkContainer>
+                    {user ? (
+                        <LinkContainer to={"/favs"}>
+                            <Nav.Link>Favorites</Nav.Link>
+                        </LinkContainer>
+                    ) : null}
+                    <Form inline onSubmit={searchEntities}>
+                        <FormControl
+                            type="text"
+                            placeholder="Search"
+                            className="mr-sm-2"
+                            name="search"
+                            onChange={handleChange}
+                            // onchange={(e) => { onchange(e) }}
+                        />
+                        <Button type="submit" variant="outline-success">
+                            Search
+                        </Button>
+                    </Form>
                 </Nav>
-                <Form inline>
-                    <FormControl
-                        type="text"
-                        placeholder="Search"
-                        className="mr-sm-2"
-                    />
-                    <Button variant="outline-success">Search</Button>
-                </Form>
+
+                <User />
             </Navbar.Collapse>
         </Navbar>
     );

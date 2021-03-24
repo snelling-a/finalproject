@@ -3,4 +3,4 @@ import ReactDOM from "react-dom";
 
 import Hike from "./Hike";
 
-ReactDOM.render(<Hike />, document.getElementById("app"));
+ReactDOM.render(<Hike config={app_config}/>, document.getElementById("app"));

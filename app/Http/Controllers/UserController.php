@@ -36,10 +36,16 @@ class UserController extends Controller
 
     {
         return Auth::user();
-        // $user = Auth::user();
-
-        // return [
-        //     'user' => $user
-        // ];
     }
+
+	
+		public function myFavorites()
+	{
+		// find all favorites
+		$myFavorites = Auth::user()->favorites;
+		
+		return $myFavorites;
+	}
+
+	
 }

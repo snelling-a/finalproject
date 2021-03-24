@@ -75,13 +75,18 @@ const Register = () => {
         }
     };
     return (
-        <Container>
+        <Container className="d-flex flex-column align-items-center flex-nowrap">
+            <Form.Label className="form-control-lg text-center">
+                Register an account to submit new destinations, leave ratings
+                and save your favorite destinations!
+            </Form.Label>
             <Form
                 noValidate
                 validated={validated}
                 action="/register"
                 method="post"
                 onSubmit={handleSubmit}
+                className=" w-50"
             >
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>

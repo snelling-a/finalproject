@@ -46,9 +46,9 @@ const Login = () => {
     };
 
     return (
-        <Container>
+        <Container className="d-flex flex-column align-items-center flex-nowrap">
             <Form action="/login" method="post" onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                         type="email"

@@ -16,11 +16,11 @@ trait PasswordValidationRules
 
     protected function passwordRules()
     {
-	// 	$password = (new Password)->length(8, 20)->requireUppercase()->requireNumeric();
-		$password = (new Password);
+        // 	$password = (new Password)->length(8, 20)->requireUppercase()->requireNumeric();
+        $password = (new Password)->length(4, 20);
 
         // (new Password)->length(8, 20)->requireUppercase();
-      
+
         return ['required', 'string', $password, 'confirmed'];
     }
 }

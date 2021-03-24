@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Container, Jumbotron } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Jumbotron, Row, Col } from "react-bootstrap";
 import Car from "./Car";
 import Homecard from "./Homecard";
+import ScrollToTop from "react-scroll-up";
+import { ArrowUpCircle } from "react-bootstrap-icons";
 
-const Home = () => {
+import GoogleContext from "../../Hike";
+import SearchContext from "../../Hike";
+
+const Home = (props) => {
+    const value = useContext(GoogleContext);
+    const search = useContext(SearchContext);
+
     // state section
     const [entities, setEntities] = useState({});
 
@@ -19,34 +27,40 @@ const Home = () => {
         fetchEntities();
     }, []);
 
-    useEffect(() => {
-        console.log(entities);
-    }, [entities]);
-
     return (
-        <Container>
-            <Jumbotron fluid>
-                <Container>
-                    <h2 className="text-primary my-3">
-                        Pick your next adventure
-                    </h2>
-                </Container>
-            </Jumbotron>
+        <Container className="bg-light pb-2 my-2">
             <Car />
-            {/* {Array(0)
-                .fill(null)
-                .map((a, i) => (
-                    <Homecard key={i} />
-                ))} */}
-            {entities.length > 0
-                ? entities.map((i) => <Homecard key={i.id} data={i} />)
-                : null}
+            <Container>
+                {search && <div>Search context loaded</div>}
+                <Row xs={1} md={2}>
+                    {" "}
+                    {entities.length > 0
+                        ? entities.map((i) => (
+                              <Col key={i.id} className="p-2">
+                                  <Homecard data={i} />{" "}
+                              </Col>
+                          ))
+                        : null}
+                </Row>
+            </Container>
+            <ScrollToTop
+                showUnder={160}
+                style={{
+                    position: "fixed",
+                    bottom: 30,
+                    right: 15,
+                    cursor: "pointer",
+                    transitionDuration: "0.2s",
+                    transitionTimingFunction: "linear",
+                    transitionDelay: "0s",
+                }}
+            >
+                <span>
+                    <ArrowUpCircle class="text-dark" width="32" height="32" />
+                </span>
+            </ScrollToTop>
         </Container>
     );
 };
 
 export default Home;
-
-{
-    /* <Homecard props={entities} />; */
-}

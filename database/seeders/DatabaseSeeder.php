@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\CommentFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // $this->call(AdminSeeder::class);
+        $this->call(EntitiesSeeder::class);
+        $this->call(CommentsSeeder::class);
     }
 }

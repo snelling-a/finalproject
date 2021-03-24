@@ -13,5 +13,5 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/user', "UserController@user");
+// Route::get('/user', "UserController@user");
 Route::view('/{path?}', 'welcome')->where('path', '.*');

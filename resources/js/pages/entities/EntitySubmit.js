@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { kml } from "@tmcw/togeojson";
 import {
     Button,
@@ -7,6 +7,8 @@ import {
     FormControl,
     InputGroup,
 } from "react-bootstrap";
+import { UserContext } from "../../Hike";
+import { Link, Redirect } from "react-router-dom";
 
 function EntitySubmit() {
     // state section
@@ -20,6 +22,8 @@ function EntitySubmit() {
         photo: "",
         description: "",
     });
+
+    const user = useContext(UserContext);
 
     // Handle submit and convert KML to geoJSON
     const handleSubmit = () => {
@@ -49,11 +53,16 @@ function EntitySubmit() {
             setStatus("Converting to GeoJSON");
 
             const geoJson = kml(xml);
-            setStatus("Success");
+            console.log(geoJson);
+            setStatus('Success');
 
-            const coords = geoJson.features.map((feature) => ({
-                lng: feature.geometry.coordinates[0],
-                lat: feature.geometry.coordinates[1],
+            const coordsR = geoJson.features[geoJson.features.length -1].geometry.coordinates;
+
+            console.log(coordsR);
+
+            let coords = coordsR.map((point) => ({
+                lng: point[0],
+                lat: point[1]
                 // elv: feature.geometry.coordinates[2],     //// WIP
             }));
 
@@ -62,12 +71,8 @@ function EntitySubmit() {
             // all form data to POST
             sendToServer(request_data);
 
-            //////////////
-
-            // console.log(setData.values);
-            // LNG/LAT on 39/40 switched - Gulf of Aden
-
-            /////////////
+            
+            
         };
 
         reader.readAsText(file);
@@ -121,92 +126,100 @@ function EntitySubmit() {
     };
 
     return (
-        <Container className="w-50">
-            <Form
-                noValidate
-                validated={validated}
-                action=""
-                method=""
-                onSubmit={handleSubmit}
-            >
-                <Form.Group controlId="name">
-                    <Form.Label>Name</Form.Label>
-                    <InputGroup className="mb-2">
-                        <InputGroup.Prepend>
-                            <InputGroup.Text>🌄</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl
+        <Container className="d-flex flex-column align-items-center flex-nowrap">
+            {!user ? (
+                <Redirect to="/register" />
+            ) : (
+                <Form
+                    noValidate
+                    validated={validated}
+                    action=""
+                    method=""
+                    onSubmit={handleSubmit}
+                >
+                    <Form.Group controlId="name">
+                        <Form.Label>Name</Form.Label>
+                        <InputGroup className="mb-2">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>🌄</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                type="text"
+                                name="name"
+                                value={name}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a name.
+                            </Form.Control.Feedback>
+                        </InputGroup>{" "}
+                    </Form.Group>
+                    <Form.Group controlId="region">
+                        <Form.Label>Region</Form.Label>
+                        <Form.Control
                             type="text"
-                            name="name"
-                            value={name}
+                            name="region"
+                            value={region}
                             onChange={handleChange}
                             required
                         />
 
                         <Form.Control.Feedback type="invalid">
-                            Please provide a name.
+                            Please provide a region.
                         </Form.Control.Feedback>
-                    </InputGroup>{" "}
-                </Form.Group>
-                <Form.Group controlId="region">
-                    <Form.Label>Region</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="region"
-                        value={region}
-                        onChange={handleChange}
-                        required
-                    />
+                    </Form.Group>
+                    <Form.Group controlId="photo">
+                        <Form.Label>Photo</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="photo"
+                            value={photo}
+                            onChange={handleChange}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a photo.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            type="text"
+                            as="textarea"
+                            name="description"
+                            value={description}
+                            onChange={handleChange}
+                            required
+                        />
 
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a region.
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="photo">
-                    <Form.Label>Photo</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="photo"
-                        value={photo}
-                        onChange={handleChange}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a photo.
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="description"
-                        value={description}
-                        onChange={handleChange}
-                        required
-                    />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a description.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="file">
+                        <Form.Label>GPS File</Form.Label>
+                        <Form.Control
+                            type="file"
+                            required
+                            onChange={(e) => {
+                                setFile(e.target.files[0]);
+                            }}
+                        />
+                        <Form.Text id="fileForm" muted>
+                            Accepted filetypes: KML
+                        </Form.Text>
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a GPS file.
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a description.
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="file">
-                    <Form.Label>GPS File</Form.Label>
-                    <Form.Control
-                        type="file"
-                        required
-                        onChange={(e) => {
-                            setFile(e.target.files[0]);
-                        }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please provide a GPS file.
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Button variant="success" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                    <Button variant="success" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            )}
         </Container>
     );
 }
