@@ -1,0 +1,26 @@
+[production]
+    ; server settings (leave them as they are):
+    scheme = ftp
+    host = 138.201.247.130
+    port = 21
+    passive = true
+    path = "/web"
+
+    ; credentials:
+    user = ""
+    pass = ""
+
+    ; branch to deploy:
+    branch = "master"
+
+    ; path from Git root to Laravel root:
+    ; base = "/"
+
+    ; exclusions:
+    exclude[] = "node_modules/*"
+    exclude[] = "vendor/*"
+
+    ; folder to purge after deploy
+    purge[] = "bootstrap/cache/"
+
+    post-deploy[] = "php artisan assets:upload"
