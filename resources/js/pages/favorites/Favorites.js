@@ -47,7 +47,10 @@ function Favorites() {
                                 <Card.Title className="mt-1">
                                     {firstToUpper(favorite.name)}
                                 </Card.Title>
-                                <Card.Text className="d-inline-block text-truncate">
+                                <Card.Text
+                                    className="d-inline-block text-truncate"
+                                    style={{ maxWidth: "14rem" }}
+                                >
                                     {firstToUpper(favorite.description)}
                                 </Card.Text>
                                 <LinkContainer
