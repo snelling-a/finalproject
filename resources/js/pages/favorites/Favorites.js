@@ -29,22 +29,25 @@ function Favorites() {
                         <Card
                             style={{ width: "18rem" }}
                             key={i}
-                            className="d-flex flex-column justify-content-around m-1"
+                            // className="d-flex flex-column justify-content-between m-1 p-2"
+                            className="m-1 shadow"
                         >
-                            <Card.Img
-                                variant="top"
-                                src={favorite.photo}
-                                style={{
-                                    maxHeight: "100%",
-                                    overflow: "hidden",
-                                    flex: 1,
-                                }}
-                            />
-                            <Card.Body>
-                                <Card.Title>
+                            {" "}
+                            <Card.Body className="d-flex flex-column justify-content-between ">
+                                <Card.Img
+                                    variant="top"
+                                    src={favorite.photo}
+                                    style={{
+                                        maxHeight: "100%",
+                                        overflow: "hidden",
+                                        flex: 1,
+                                    }}
+                                />
+
+                                <Card.Title className="mt-1">
                                     {firstToUpper(favorite.name)}
                                 </Card.Title>
-                                <Card.Text>
+                                <Card.Text className="d-inline-block text-truncate">
                                     {firstToUpper(favorite.description)}
                                 </Card.Text>
                                 <LinkContainer
