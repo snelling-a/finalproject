@@ -11,7 +11,7 @@ class EntityController extends Controller
     public function fetch(Request $request)
     {
         $entities = Entity::get();
-        // dd($names);
+  
         return $entities;
     }
 
@@ -73,7 +73,11 @@ class EntityController extends Controller
 	}
 
 	public function search($query) { 
-			// $query = $request->input('search');
-			return Entity::query()->where('name', 'LIKE', "%{$query}%")->get();
+		
+			return Entity::query()->where('name', 'LIKE', "%{$query}%")->orWhere('region', 'LIKE', "%{$query}%")->get();
     }
 }
+
+
+// ->orWhere('category', 'LIKE', "%{$query}%")
+// ->orWhere('difficulty', 'LIKE', "%{$query}%")

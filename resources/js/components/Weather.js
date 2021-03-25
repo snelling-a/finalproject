@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ReactWeather, { useWeatherBit } from "react-open-weather";
 import { WeatherContext } from "../Hike";
 
-const Weather = () => {
+const Weather = (props) => {
     // later want to insert the lat and lng in as props of this
     // custom styling for the display
     const weatherApiKey = useContext(WeatherContext);
@@ -30,9 +30,8 @@ const Weather = () => {
     const { data, isLoading, errorMessage } = useWeatherBit({
         key: weatherApiKey,
 
-        // these to be changed by props later
-        lat: "50.0755",
-        lon: "14.4378",
+        lat: props.dir.lat,
+        lon: props.dir.lng,
 
         lang: "en",
         unit: "M", // values are (M,S,I)
@@ -44,7 +43,7 @@ const Weather = () => {
                 theme={customStyles}
                 data={data}
                 lang="en"
-                locationLabel="Prague"
+                locationLabel={props.entityName}
                 unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
                 showForecast
             />

@@ -13,7 +13,7 @@ import { Heart, HeartFill } from "react-bootstrap-icons";
 
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import Weather from "../../components/Weather";
 import Comment from "../../components/Comment";
 import { UserContext } from "../../Hike";
@@ -35,16 +35,14 @@ const EntityDetails = () => {
         const response = await fetch(url);
         const data = await response.json();
         setEntity(data);
-        console.log(data);
         let coords = JSON.parse(data.coordinates)[0];
-
         setDir(coords);
     }
 
     useEffect(() => {
         fetchEntity();
     }, []);
-    console.log(dir);
+
     function handleFavorite() {
         // // let id = user;
         // console.log(user);
@@ -55,6 +53,8 @@ const EntityDetails = () => {
         favorite === 1 ? setFavorite(0) : setFavorite(1);
     }
 
+    const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
+
     const content = !entity ? (
         <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
@@ -64,7 +64,7 @@ const EntityDetails = () => {
             <Row>
                 <Mapper entity={entity} />
             </Row>
-            <Row className="justify-content-around mt-1">
+            <Row className="d-flex justify-content-around mt-1">
                 {dir && (
                     <a
                         target="_blank"
@@ -74,7 +74,7 @@ const EntityDetails = () => {
                         <Button variant="success">Directions</Button>
                     </a>
                 )}
-                <Button variant="success">Download</Button>
+                {/* <Button variant="success">Download</Button> */}
 
                 <Button variant="outline-danger" onClick={handleFavorite}>
                     {favorite === 1 ? <HeartFill /> : <Heart />}
@@ -83,28 +83,30 @@ const EntityDetails = () => {
                 <Admin entity={entity} type={"entity"} />
             </Row>
             <Card body className="text-center my-2">
-                <h2>{entity.name}</h2>
+                <h2>{firstToUpper(entity.name)}</h2>
             </Card>
             <Tabs
-                defaultActiveKey="general"
+                defaultActiveKey="weather"
                 id="uncontrolled-tab-example"
                 className="text-center my-2"
             >
-                <Tab eventKey="general" title="General Info">
+                <Tab eventKey="weather" title="Weather Forecast">
+                    {dir && (
+                        <Weather
+                            dir={dir}
+                            entityName={firstToUpper(entity.name)}
+                        />
+                    )}
+                </Tab>
+
+                <Tab eventKey="desc" title="Description">
+                    <div>{entity.description}</div>
+                </Tab>
+
+                {/* <Tab eventKey="general" title="General Info">
                     <div>?? what goes here ??</div>
-                </Tab>
-                <Tab eventKey="gallery" title="Gallery">
-                    <Container>
-                        <Row xs={2} md={4}>
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                        </Row>
-                    </Container>
-                </Tab>
+                </Tab> */}
+
                 <Tab eventKey="reviews" title="Reviews">
                     <Container>
                         <h1 className="mt-2">Reviews</h1>
@@ -134,22 +136,26 @@ const EntityDetails = () => {
 
                     <Comment id={id} />
                 </Tab>
-                <Tab eventKey="desc" title="Description">
-                    <div>{entity.description}</div>
-                </Tab>
-                <Tab eventKey="elev" title="Elevation">
-                    <div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Sequi, excepturi?
-                    </div>
-                </Tab>
-                <Tab eventKey="weather" title="Weather Forecast">
-                    <div>
-                        <Weather />
-                    </div>
 
-                    <Button variant="success">Gallery</Button>
+                <Tab eventKey="gallery" title="Gallery">
+                    <Container>
+                        <Row xs={1} md={2}>
+                            <Image src={entity.photo} rounded />
+                        </Row>
+                    </Container>
                 </Tab>
+
+                {/* <Tab eventKey="weather" title="Weather Forecast">
+                    {dir && (
+                        <Weather
+                            dir={dir}
+                            entityName={
+                                entity.name[0].toUpperCase() +
+                                entity.name.substring(1)
+                            }
+                        />
+                    )}
+                </Tab> */}
             </Tabs>
         </Container>
     );

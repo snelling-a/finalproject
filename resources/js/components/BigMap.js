@@ -1,7 +1,4 @@
-////////// ////////// //////////
-// NOTE Google maps API needed: https://developers.google.com/maps/documentation/maps-static/get-api-key
 // Add to .env as: REACT_APP_GOOGLE_KEY='KeyGoesHere'. Make sure it is in gitIgnore
-// line 80 picks up that key very time app is built
 
 import React, { useState, useEffect, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
@@ -29,21 +26,16 @@ function BigMap(props) {
 
     let points = props.points;
 
-    // function getPoints() {
-    //     return points;
-    // }
-
-    ////////// ////////// ////////// google code
+    // google react maps
 
     function Map() {
         const [selectedPoint, setSelectedPoint] = useState(null);
-
-        // let pts = getPoints();
 
         return (
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={{ lat: 49.81, lng: 15.47 }}
+                mapTypeId={"terrain"}
             >
                 {points &&
                     points.map((point, index) => {
