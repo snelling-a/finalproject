@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -14,6 +14,7 @@ import EntityDetails from "./pages/entities/EntityDetails";
 import Home from "./pages/home/Home";
 import MapPage from "./pages/map/MapPage";
 import Favorites from "./pages/favorites/Favorites";
+import { Container } from "react-bootstrap";
 
 export const UserContext = createContext(null);
 export const GoogleContext = createContext(null);
@@ -43,21 +44,23 @@ const Hike = (props) => {
             <UserContext.Provider value={user}>
                 <GoogleContext.Provider value={key}>
                     <TopNav />
-                    <Switch>
-                        <main className="mt-3 pt-5">
+
+                    <Container className="mt-3 pt-5">
+                        <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/map" component={MapPage} />
                             <Route path="/login" component={Login} />
                             <Route path="/logout" component={Logout} />
                             <Route path="/register" component={Register} />
                             <Route path="/submit" component={EntitySubmit} />
+
                             <Route path="/favs" component={Favorites} />
                             <Route
                                 path="/details/:id"
                                 component={EntityDetails}
                             />
-                        </main>
-                    </Switch>
+                        </Switch>
+                    </Container>
                 </GoogleContext.Provider>
             </UserContext.Provider>
         </Router>

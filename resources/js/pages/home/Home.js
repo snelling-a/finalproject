@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Car from "./Car";
 import Homecard from "./Homecard";
 import ScrollToTop from "react-scroll-up";
 import { ArrowUpCircle } from "react-bootstrap-icons";
 
 import GoogleContext from "../../Hike";
+import SearchBar from "../../components/SearchBar";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
@@ -25,20 +26,13 @@ const Home = (props) => {
         fetchEntities();
     }, []);
 
-    // useEffect(() => {
-    //     console.log(entities);
-    // }, [entities]);
-
     return (
         <Container className="bg-light pb-2 my-2">
-            {/* <Jumbotron fluid className="bg-light">
-                <Container>
-                    <h1 className="text-primary mt-5 ">
-                        Find your next adventure!
-                    </h1>
-                </Container>
-            </Jumbotron> */}
             <Car />
+            <SearchBar
+                setEntities={setEntities}
+                fetchEntities={fetchEntities}
+            />
             <Container>
                 <Row xs={1} md={2}>
                     {" "}

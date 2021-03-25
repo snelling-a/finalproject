@@ -21,6 +21,7 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
+import { GeoAlt } from "react-bootstrap-icons";
 import start from "./img/start.svg";
 import beer from "./img/beer.svg";
 
@@ -67,7 +68,6 @@ function Mapper(props) {
             <GoogleMap defaultZoom={11} defaultCenter={getZero()}>
                 <Polyline
                     path={polycoords}
-                    color="#ae28ed"
                     strokeOpacity={0.8}
                     strokeWeight={2}
                 />
@@ -78,6 +78,7 @@ function Mapper(props) {
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
                 />
+
                 <InfoWindow position={getZero()}>
                     <div>zero here</div>
                 </InfoWindow>

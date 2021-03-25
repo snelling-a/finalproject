@@ -71,4 +71,9 @@ class EntityController extends Controller
 
 		return back();
 	}
+
+	public function search($query) { 
+			// $query = $request->input('search');
+			return Entity::query()->where('name', 'LIKE', "%{$query}%")->get();
+    }
 }

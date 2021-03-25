@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../Hike";
 import Logout from "../pages/auth/Logout";
@@ -60,14 +60,6 @@ const TopNav = () => {
                             <Nav.Link>Favorites</Nav.Link>
                         </LinkContainer>
                     ) : null}
-                    <Form inline>
-                        <FormControl
-                            type="text"
-                            placeholder="Search"
-                            className="mr-sm-2"
-                        />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
                 </Nav>
 
                 <User />

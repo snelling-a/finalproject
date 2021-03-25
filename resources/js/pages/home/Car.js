@@ -49,7 +49,7 @@ const Car = () => {
                     alt="On a bike"
                 />
                 <Carousel.Caption>
-                    <h2 className="text-body">On your bike!</h2>
+                    <h2>On your bike!</h2>
                     <p>
                         A bicycle ride around the world begins with a single
                         pedal stroke.
