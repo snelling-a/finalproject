@@ -34,13 +34,10 @@ const EntityDetails = () => {
         const response = await fetch(url);
         const data = await response.json();
         setEntity(data);
-<<<<<<< HEAD
         console.log(data);
         let coords = JSON.parse(data.coordinates)[0];
 
         setDir(coords);
-=======
->>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
     }
 
     useEffect(() => {

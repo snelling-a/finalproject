@@ -10,10 +10,6 @@ import SearchContext from "../../Hike";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
-<<<<<<< HEAD
-    const search = useContext(SearchContext);
-=======
->>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
 
     // state section
     const [entities, setEntities] = useState({});

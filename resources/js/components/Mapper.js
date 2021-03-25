@@ -21,13 +21,10 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
-<<<<<<< HEAD
 import { GeoAlt } from "react-bootstrap-icons";
-=======
 import start from "./img/start.svg";
 import beer from "./img/beer.svg";
 
->>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
 import { GoogleContext } from "../Hike";
 
 function Mapper(props) {
@@ -77,11 +74,7 @@ function Mapper(props) {
                 <Marker
                     position={getStart()}
                     icon={{
-<<<<<<< HEAD
-                        url: "/startGeo.svg",
-=======
                         url: start,
->>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
                 />
@@ -92,11 +85,7 @@ function Mapper(props) {
                 <Marker
                     position={getEnd()}
                     icon={{
-<<<<<<< HEAD
-                        url: "/endGeo.svg",
-=======
                         url: beer,
->>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
                 />
