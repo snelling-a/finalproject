@@ -7,6 +7,7 @@ import {
     Card,
     Tabs,
     Tab,
+    Spinner,
 } from "react-bootstrap";
 import { Heart, HeartFill, MapFill } from "react-bootstrap-icons";
 
@@ -69,9 +70,9 @@ const EntityDetails = () => {
     const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
     const content = !entity ? (
-        <div>
-            <h1>loading...</h1>
-        </div>
+        <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     ) : (
         <Container className="px-4">
             <Row>
