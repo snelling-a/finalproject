@@ -25,8 +25,7 @@ import bootsMed from "./img/bootsMed.svg";
 import bootsHard from "./img/bootsHard.svg";
 
 function BigMap(props) {
-    const apiKeyContext = useContext(GoogleContext);
-    const apiKey = apiKeyContext["REACT_APP_GOOGLE_API_KEY"];
+    const apiKey = useContext(GoogleContext);
 
     let points = props.points;
 
