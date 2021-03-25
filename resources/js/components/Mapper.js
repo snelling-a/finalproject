@@ -31,8 +31,7 @@ import { GoogleContext } from "../Hike";
 function Mapper(props) {
     let polycoords = JSON.parse(props.entity.coordinates);
 
-    const apiKeyContext = useContext(GoogleContext);
-    const apiKey = apiKeyContext["REACT_APP_GOOGLE_API_KEY"];
+    const apiKey = useContext(GoogleContext);
 
     ////////// ////////// ////////// deterine start, end, zero
 
@@ -48,7 +47,7 @@ function Mapper(props) {
             lat1: getStart().lat,
             lng1: getStart().lng,
             lat2: getEnd().lat,
-            lng2: getEnd().lng
+            lng2: getEnd().lng,
         };
         if (greatCircleDistance(coords) < 0.2) return true;
         return false;
@@ -105,13 +104,15 @@ function Mapper(props) {
                 <InfoWindow position={getZero()}>
                     <div>zero here</div>
                 </InfoWindow>
-                {!isStartEnd && ( <Marker
-                    position={getEnd()}
-                    icon={{
-                        url: beer,
-                        scaledSize: new window.google.maps.Size(30, 30),
-                    }}
-                />)}
+                {!isStartEnd && (
+                    <Marker
+                        position={getEnd()}
+                        icon={{
+                            url: beer,
+                            scaledSize: new window.google.maps.Size(30, 30),
+                        }}
+                    />
+                )}
             </GoogleMap>
         );
     }

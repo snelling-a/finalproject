@@ -18,9 +18,13 @@ import { Container } from "react-bootstrap";
 
 export const UserContext = createContext(null);
 export const GoogleContext = createContext(null);
+export const WeatherContext = createContext(null);
 
 const Hike = (props) => {
-    const key = props.config;
+    console.log("file: Hike.js  line 23  Hike  props", props);
+
+    const googleKey = props.config.REACT_APP_GOOGLE_API_KEY;
+    const weatherKey = props.config.REACT_OPEN_WEATHER_API_KEY;
 
     const [user, setUser] = useState(null);
 
@@ -42,7 +46,7 @@ const Hike = (props) => {
     return (
         <Router>
             <UserContext.Provider value={user}>
-                <GoogleContext.Provider value={key}>
+                <GoogleContext.Provider value={googleKey}>
                     <TopNav />
 
                     <Container className="mt-3 pt-5">
@@ -55,10 +59,12 @@ const Hike = (props) => {
                             <Route path="/submit" component={EntitySubmit} />
 
                             <Route path="/favs" component={Favorites} />
-                            <Route
-                                path="/details/:id"
-                                component={EntityDetails}
-                            />
+                            <WeatherContext.Provider value={weatherKey}>
+                                <Route
+                                    path="/details/:id"
+                                    component={EntityDetails}
+                                />
+                            </WeatherContext.Provider>
                         </Switch>
                     </Container>
                 </GoogleContext.Provider>
