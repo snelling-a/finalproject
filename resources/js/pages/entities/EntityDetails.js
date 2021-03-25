@@ -52,6 +52,8 @@ const EntityDetails = () => {
         favorite === 1 ? setFavorite(0) : setFavorite(1);
     }
 
+    const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
+
     const content = !entity ? (
         <div>
             <h1>loading...</h1>
@@ -71,7 +73,7 @@ const EntityDetails = () => {
                         <Button variant="success">Directions</Button>
                     </a>
                 )}
-                <Button variant="success">Download</Button>
+                {/* <Button variant="success">Download</Button> */}
 
                 <Button variant="outline-danger" onClick={handleFavorite}>
                     {favorite === 1 ? <HeartFill /> : <Heart />}
@@ -80,27 +82,29 @@ const EntityDetails = () => {
                 <Admin entity={entity} type={"entity"} />
             </Row>
             <Card body className="text-center my-2">
-                <h2>
-                    {entity.name[0].toUpperCase() + entity.name.substring(1)}
-                </h2>
+                <h2>{firstToUpper(entity.name)}</h2>
             </Card>
             <Tabs
-                defaultActiveKey="general"
+                defaultActiveKey="weather"
                 id="uncontrolled-tab-example"
                 className="text-center my-2"
             >
+                <Tab eventKey="weather" title="Weather Forecast">
+                    {dir && (
+                        <Weather
+                            dir={dir}
+                            entityName={firstToUpper(entity.name)}
+                        />
+                    )}
+                </Tab>
+
                 <Tab eventKey="general" title="General Info">
                     <div>?? what goes here ??</div>
                 </Tab>
                 <Tab eventKey="gallery" title="Gallery">
                     <Container>
-                        <Row xs={2} md={4}>
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
-                            <Image src={entity.photo} thumbnail />
+                        <Row xs={1} md={2}>
+                            <Image src={entity.photo} rounded />
                         </Row>
                     </Container>
                 </Tab>
@@ -136,13 +140,8 @@ const EntityDetails = () => {
                 <Tab eventKey="desc" title="Description">
                     <div>{entity.description}</div>
                 </Tab>
-                <Tab eventKey="elev" title="Elevation">
-                    <div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Sequi, excepturi?
-                    </div>
-                </Tab>
-                <Tab eventKey="weather" title="Weather Forecast">
+
+                {/* <Tab eventKey="weather" title="Weather Forecast">
                     {dir && (
                         <Weather
                             dir={dir}
@@ -152,7 +151,7 @@ const EntityDetails = () => {
                             }
                         />
                     )}
-                </Tab>
+                </Tab> */}
             </Tabs>
         </Container>
     );

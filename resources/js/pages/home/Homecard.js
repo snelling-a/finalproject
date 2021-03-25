@@ -3,12 +3,14 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Homecard = (props) => {
-    const { name, photo, region, description, id } = props.data;
+    const { photo, id, name, description, region } = props.data;
+
+    const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
     return (
         <Card className="my-3 shadow w-100 h-100">
             <Card.Body className="d-flex flex-column justify-content-around">
-                <Card.Title className="">{name}</Card.Title>
+                <Card.Title className="">{firstToUpper(name)}</Card.Title>
 
                 <Card.Img
                     variant="top"
@@ -16,10 +18,12 @@ const Homecard = (props) => {
                     style={{ maxHeight: "100%", overflow: "hidden", flex: 1 }}
                 />
 
-                <Card.Text className="p-1">{description}</Card.Text>
+                <Card.Text className="p-1">
+                    {firstToUpper(description)}
+                </Card.Text>
                 <ListGroup variant="flush">
                     <ListGroup.Item className="py-2 px-1">
-                        Region: {region}
+                        Region: {firstToUpper(region)}
                     </ListGroup.Item>
                     <ListGroup.Item className="py-2 px-1">
                         Difficulty: 4/5
