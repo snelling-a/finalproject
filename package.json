@@ -30,6 +30,7 @@
         "@react-google-maps/api": "^2.1.1",
         "@tmcw/togeojson": "^4.3.0",
         "dotenv": "^8.2.0",
+        "great-circle-distance": "^1.0.2",
         "moment": "^2.29.1",
         "react-bootstrap": "^1.5.2",
         "react-bootstrap-icons": "^1.4.0",
