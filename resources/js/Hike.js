@@ -14,6 +14,7 @@ import EntityDetails from "./pages/entities/EntityDetails";
 import Home from "./pages/home/Home";
 import MapPage from "./pages/map/MapPage";
 import Favorites from "./pages/favorites/Favorites";
+import { Container } from "react-bootstrap";
 
 export const UserContext = createContext(null);
 export const GoogleContext = createContext(null);
@@ -43,8 +44,9 @@ const Hike = (props) => {
             <UserContext.Provider value={user}>
                 <GoogleContext.Provider value={key}>
                     <TopNav />
-                    <Switch>
-                        <main className="mt-3 pt-5">
+
+                    <Container className="mt-3 pt-5">
+                        <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/map" component={MapPage} />
                             <Route path="/login" component={Login} />
@@ -57,8 +59,8 @@ const Hike = (props) => {
                                 path="/details/:id"
                                 component={EntityDetails}
                             />
-                        </main>
-                    </Switch>
+                        </Switch>
+                    </Container>
                 </GoogleContext.Provider>
             </UserContext.Provider>
         </Router>
