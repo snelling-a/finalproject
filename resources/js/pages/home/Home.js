@@ -6,12 +6,10 @@ import ScrollToTop from "react-scroll-up";
 import { ArrowUpCircle } from "react-bootstrap-icons";
 
 import GoogleContext from "../../Hike";
-import SearchContext from "../../Hike";
 import SearchBar from "../../components/SearchBar";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
-    const search = useContext(SearchContext);
 
     // state section
     const [entities, setEntities] = useState({});
@@ -36,7 +34,6 @@ const Home = (props) => {
                 fetchEntities={fetchEntities}
             />
             <Container>
-                {search && <div>Search context loaded</div>}
                 <Row xs={1} md={2}>
                     {" "}
                     {entities.length > 0
