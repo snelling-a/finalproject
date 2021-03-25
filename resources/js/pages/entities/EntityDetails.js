@@ -63,7 +63,7 @@ const EntityDetails = () => {
             <Row>
                 <Mapper entity={entity} />
             </Row>
-            <Row className="justify-content-around mt-1">
+            <Row className="d-flex justify-content-around mt-1">
                 {dir && (
                     <a
                         target="_blank"
@@ -98,16 +98,14 @@ const EntityDetails = () => {
                     )}
                 </Tab>
 
-                <Tab eventKey="general" title="General Info">
+                <Tab eventKey="desc" title="Description">
+                    <div>{entity.description}</div>
+                </Tab>
+
+                {/* <Tab eventKey="general" title="General Info">
                     <div>?? what goes here ??</div>
-                </Tab>
-                <Tab eventKey="gallery" title="Gallery">
-                    <Container>
-                        <Row xs={1} md={2}>
-                            <Image src={entity.photo} rounded />
-                        </Row>
-                    </Container>
-                </Tab>
+                </Tab> */}
+
                 <Tab eventKey="reviews" title="Reviews">
                     <Container>
                         <h1 className="mt-2">Reviews</h1>
@@ -137,8 +135,13 @@ const EntityDetails = () => {
 
                     <Comment id={id} />
                 </Tab>
-                <Tab eventKey="desc" title="Description">
-                    <div>{entity.description}</div>
+
+                <Tab eventKey="gallery" title="Gallery">
+                    <Container>
+                        <Row xs={1} md={2}>
+                            <Image src={entity.photo} rounded />
+                        </Row>
+                    </Container>
                 </Tab>
 
                 {/* <Tab eventKey="weather" title="Weather Forecast">

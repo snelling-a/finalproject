@@ -18,6 +18,8 @@ function Favorites() {
         fetchFavorites();
     }, []);
 
+    const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
+
     return (
         <Container fluid>
             <h2>My favorites</h2>
@@ -25,14 +27,26 @@ function Favorites() {
                 {favorites &&
                     favorites.map((favorite, i) => (
                         <Card
-                            style={{ width: "20rem" }}
+                            style={{ width: "18rem" }}
                             key={i}
-                            className="d-flex flex-column justify-content-between m-1"
+                            className="d-flex flex-column justify-content-around m-1"
                         >
-                            <Card.Img variant="top" src={favorite.photo} />
+                            <Card.Img
+                                variant="top"
+                                src={favorite.photo}
+                                style={{
+                                    maxHeight: "100%",
+                                    overflow: "hidden",
+                                    flex: 1,
+                                }}
+                            />
                             <Card.Body>
-                                <Card.Title>{favorite.name}</Card.Title>
-                                <Card.Text>{favorite.description}</Card.Text>
+                                <Card.Title>
+                                    {firstToUpper(favorite.name)}
+                                </Card.Title>
+                                <Card.Text>
+                                    {firstToUpper(favorite.description)}
+                                </Card.Text>
                                 <LinkContainer
                                     to={"/details/" + favorite.pivot.entity_id}
                                 >
