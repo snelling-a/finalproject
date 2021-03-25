@@ -7,7 +7,6 @@ import {
     Card,
     Tabs,
     Tab,
-    Spinner,
 } from "react-bootstrap";
 import { Heart, HeartFill, MapFill } from "react-bootstrap-icons";
 
@@ -19,6 +18,7 @@ import { UserContext } from "../../Hike";
 import Admin from "../../components/Admin";
 import Moment from "react-moment";
 import Mapper from "../../components/Mapper";
+import BSSpinner from "../../components/BSSpinner";
 
 const EntityDetails = () => {
     const user = useContext(UserContext);
@@ -70,9 +70,7 @@ const EntityDetails = () => {
     const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
     const content = !entity ? (
-        <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-        </Spinner>
+        <BSSpinner />
     ) : (
         <Container className="px-4">
             <Row>

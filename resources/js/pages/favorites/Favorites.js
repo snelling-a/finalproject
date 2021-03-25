@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Card, Button, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import BSSpinner from "../../components/BSSpinner";
 
 function Favorites() {
     const [favorites, setFavorites] = useState(null);
@@ -19,7 +20,9 @@ function Favorites() {
 
     const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
-    return (
+    const content = !favorites ? (
+        <BSSpinner />
+    ) : (
         <Container fluid>
             <h2>My favorites</h2>
             <Row xs={1} md={2} lg={4}>
@@ -62,6 +65,8 @@ function Favorites() {
             </Row>
         </Container>
     );
+
+    return <>{content}</>;
 }
 
 export default Favorites;

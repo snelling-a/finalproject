@@ -7,6 +7,7 @@ import { ArrowUpCircle } from "react-bootstrap-icons";
 
 import GoogleContext from "../../Hike";
 import SearchBar from "../../components/SearchBar";
+import BSSpinner from "../../components/BSSpinner";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
@@ -25,8 +26,9 @@ const Home = (props) => {
     useEffect(() => {
         fetchEntities();
     }, []);
-
-    return (
+    const content = !entities ? (
+        <BSSpinner />
+    ) : (
         <Container className="bg-light pb-2 my-2">
             <Car />
             <SearchBar
@@ -67,6 +69,8 @@ const Home = (props) => {
             </ScrollToTop>
         </Container>
     );
+
+    return <>{content}</>;
 };
 
 export default Home;
