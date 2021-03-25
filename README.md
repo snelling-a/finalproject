@@ -1,6 +1,6 @@
 # #HikeCzech
 
-## Check us out at [HikeCzech](http://hikeczech.codeboot.cz/){:target="_blank" rel="noopener}
+## Check us out at [HikeCzech](http://hikeczech.codeboot.cz/)
 
 ### **DEV**
 
