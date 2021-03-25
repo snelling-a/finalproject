@@ -14,8 +14,6 @@ import EntityDetails from "./pages/entities/EntityDetails";
 import Home from "./pages/home/Home";
 import MapPage from "./pages/map/MapPage";
 import Favorites from "./pages/favorites/Favorites";
-import SearchResults from "./pages/search/SearchResults";
-// import { SearchContext } from "./components/TopNav";
 
 export const UserContext = createContext(null);
 export const GoogleContext = createContext(null);
@@ -24,9 +22,7 @@ const Hike = (props) => {
     const key = props.config;
 
     const [user, setUser] = useState(null);
-    const [search, setSearch] = useState("");
 
-    console.log(search);
     const loadCurrentUser = async () => {
         // console.log("Loading current user information");
         const response = await fetch("/api/user", {
@@ -46,8 +42,7 @@ const Hike = (props) => {
         <Router>
             <UserContext.Provider value={user}>
                 <GoogleContext.Provider value={key}>
-                    {/* <SearchContext.Provider search={search}> */}
-                    <TopNav search={search} />
+                    <TopNav />
                     <Switch>
                         <main className="mt-3 pt-5">
                             <Route exact path="/" component={Home} />
@@ -56,12 +51,7 @@ const Hike = (props) => {
                             <Route path="/logout" component={Logout} />
                             <Route path="/register" component={Register} />
                             <Route path="/submit" component={EntitySubmit} />
-                            <Route
-                                path="/search"
-                                component={() => (
-                                    <SearchResults search={search} />
-                                )}
-                            />
+
                             <Route path="/favs" component={Favorites} />
                             <Route
                                 path="/details/:id"
@@ -69,7 +59,6 @@ const Hike = (props) => {
                             />
                         </main>
                     </Switch>
-                    {/* </SearchContext.Provider> */}
                 </GoogleContext.Provider>
             </UserContext.Provider>
         </Router>

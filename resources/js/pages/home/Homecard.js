@@ -33,7 +33,6 @@ const Homecard = (props) => {
             <LinkContainer to={"/details/" + id}>
                 <Button variant="success">Find out more</Button>
             </LinkContainer>
-            {/* <Button variant="primary">Find out more</Button> */}
         </Card>
     );
 };

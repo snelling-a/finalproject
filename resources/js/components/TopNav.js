@@ -1,5 +1,5 @@
-import React, { useContext, useState, createContext } from "react";
-import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../Hike";
 import Logout from "../pages/auth/Logout";
@@ -32,34 +32,8 @@ function User() {
     );
 }
 
-const TopNav = (props) => {
+const TopNav = () => {
     const user = useContext(UserContext);
-
-    const [items, setItems] = useState(null);
-    const [query, setQuery] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    async function searchEntities(event) {
-        event.preventDefault();
-
-        const url = `/api/entity/search/${query}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setItems(data);
-        setIsLoading(false);
-        search(data);
-        // console.log(items);
-    }
-
-    const handleChange = (event) => {
-        // let value = event.target.value;
-        // console.log(value);
-        // setQuery(value);
-        props.search(event.target.value);
-    };
-
-    console.log(props.search);
 
     return (
         <Navbar collapseOnSelect bg="white" expand="lg" fixed="top">
@@ -86,19 +60,6 @@ const TopNav = (props) => {
                             <Nav.Link>Favorites</Nav.Link>
                         </LinkContainer>
                     ) : null}
-                    <Form inline onSubmit={searchEntities}>
-                        <FormControl
-                            type="text"
-                            placeholder="Search"
-                            className="mr-sm-2"
-                            name="search"
-                            onChange={handleChange}
-                            // onchange={(e) => { onchange(e) }}
-                        />
-                        <Button type="submit" variant="outline-success">
-                            Search
-                        </Button>
-                    </Form>
                 </Nav>
 
                 <User />
