@@ -6,18 +6,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button } from "react-bootstrap";
+import { GoogleContext } from "../Hike";
 
+//maps
 import {
     GoogleMap,
     withScriptjs,
     withGoogleMap,
-    // Polyline,
     Marker,
     InfoWindow,
 } from "react-google-maps";
-import boots from "./img/boots.svg";
 
-import { GoogleContext } from "../Hike";
+//images
+import boots from "./img/boots.svg";
+import bike from "./img/bike.svg";
+import bootsEasy from "./img/bootsEasy.svg";
+import bootsMed from "./img/bootsMed.svg";
+import bootsHard from "./img/bootsHard.svg";
 
 function BigMap(props) {
     const apiKeyContext = useContext(GoogleContext);
@@ -42,19 +47,94 @@ function BigMap(props) {
                 defaultCenter={{ lat: 49.81, lng: 15.47 }}
             >
                 {points &&
-                    points.map((point, index) => (
-                        <Marker
-                            key={index}
-                            position={JSON.parse(point.coordinates)[0]}
-                            onClick={() => {
-                                setSelectedPoint(point);
-                            }}
-                            icon={{
-                                url: boots,
-                                scaledSize: new window.google.maps.Size(30, 30),
-                            }}
-                        />
-                    ))}
+                    points.map((point, index) => {
+                        if (point.category == "easy") {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={JSON.parse(point.coordinates)[0]}
+                                    onClick={() => {
+                                        setSelectedPoint(point);
+                                    }}
+                                    icon={{
+                                        url: bootsEasy,
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                    }}
+                                />
+                            );
+                        } else if (point.category == "med") {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={JSON.parse(point.coordinates)[0]}
+                                    onClick={() => {
+                                        setSelectedPoint(point);
+                                    }}
+                                    icon={{
+                                        url: bootsMed,
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                    }}
+                                />
+                            );
+                        } else if (point.category == "hard") {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={JSON.parse(point.coordinates)[0]}
+                                    onClick={() => {
+                                        setSelectedPoint(point);
+                                    }}
+                                    icon={{
+                                        url: bootsHard,
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                    }}
+                                />
+                            );
+                        } else if (point.category == "bike") {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={JSON.parse(point.coordinates)[0]}
+                                    onClick={() => {
+                                        setSelectedPoint(point);
+                                    }}
+                                    icon={{
+                                        url: bike,
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                    }}
+                                />
+                            );
+                        } else {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={JSON.parse(point.coordinates)[0]}
+                                    onClick={() => {
+                                        setSelectedPoint(point);
+                                    }}
+                                    icon={{
+                                        url: boots,
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                    }}
+                                />
+                            );
+                        }
+                    })}
 
                 {selectedPoint && (
                     <InfoWindow
