@@ -1,18 +1,9 @@
-////////// ////////// //////////
-// NOTE Google maps API needed: https://developers.google.com/maps/documentation/maps-static/get-api-key
 // Add to .env as: REACT_APP_GOOGLE_KEY='KeyGoesHere'. Make sure it is in gitIgnore
-// line 80 picks up that key very time app is built
-// can test it by passing the following from parent container (will plot the Bermuda Triangle) - will need to zoon out.
-// const polycoords = [
-//   { lat: 25.774, lng: -80.19 },
-//   { lat: 18.466, lng: -66.118 },
-//   { lat: 32.321, lng: -64.757 },
-//   { lat: 25.774, lng: -80.19 },
-// ];
-// line 36 pops off the last object in array of coordinates. Mapy.cz KML->geoJSON->coords array has, for some reason, weirdness in the fianl element.
-// should a Czech route place you in the Gulf of Aden...we've been there. Warm water. Switch lat/lng.
-////////// ////////// //////////
+
 import React, { useState, useEffect, useContext } from "react";
+import { GoogleContext } from "../Hike";
+
+//maps
 import {
     GoogleMap,
     withScriptjs,
@@ -21,19 +12,20 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
-import { GeoAlt } from "react-bootstrap-icons";
+
+//lat-lng distance calc (dependency)
 const { greatCircleDistance } = require("great-circle-distance");
+
+//images
 import start from "./img/start.svg";
 import beer from "./img/beer.svg";
-
-import { GoogleContext } from "../Hike";
 
 function Mapper(props) {
     let polycoords = JSON.parse(props.entity.coordinates);
 
     const apiKey = useContext(GoogleContext);
 
-    ////////// ////////// ////////// deterine start, end, zero
+    // helper functions
 
     const coords = {
         lat1: "12.9611159",
@@ -80,10 +72,16 @@ function Mapper(props) {
 
         return zero;
     }
-    ////////// ////////// ////////// google code
+
+    // google react maps
+
     function Map() {
         return (
-            <GoogleMap defaultZoom={11} defaultCenter={getZero()}>
+            <GoogleMap
+                defaultZoom={11}
+                defaultCenter={getZero()}
+                mapTypeId={"terrain"}
+            >
                 <Polyline
                     path={polycoords}
                     geodesic={true}
