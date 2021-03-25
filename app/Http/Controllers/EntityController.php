@@ -11,7 +11,7 @@ class EntityController extends Controller
     public function fetch(Request $request)
     {
         $entities = Entity::get();
-        // dd($names);
+  
         return $entities;
     }
 

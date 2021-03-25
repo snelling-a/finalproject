@@ -21,15 +21,12 @@ export const GoogleContext = createContext(null);
 export const WeatherContext = createContext(null);
 
 const Hike = (props) => {
-    console.log("file: Hike.js  line 23  Hike  props", props);
-
     const googleKey = props.config.REACT_APP_GOOGLE_API_KEY;
     const weatherKey = props.config.REACT_OPEN_WEATHER_API_KEY;
 
     const [user, setUser] = useState(null);
 
     const loadCurrentUser = async () => {
-        // console.log("Loading current user information");
         const response = await fetch("/api/user", {
             headers: {
                 Accept: "application/json",

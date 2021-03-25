@@ -27,8 +27,6 @@ const Weather = (props) => {
         forecastIconColor: "#4BC4F7",
     };
 
-    // const name = props.entity.name.
-
     const { data, isLoading, errorMessage } = useWeatherBit({
         key: weatherApiKey,
 
@@ -45,7 +43,7 @@ const Weather = (props) => {
                 theme={customStyles}
                 data={data}
                 lang="en"
-                locationLabel={props.entity.name}
+                locationLabel={props.entityName}
                 unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
                 showForecast
             />

@@ -12,7 +12,7 @@ import { Heart, HeartFill } from "react-bootstrap-icons";
 
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import Weather from "../../components/Weather";
 import Comment from "../../components/Comment";
 import { UserContext } from "../../Hike";
@@ -34,9 +34,7 @@ const EntityDetails = () => {
         const response = await fetch(url);
         const data = await response.json();
         setEntity(data);
-        console.log(data);
         let coords = JSON.parse(data.coordinates)[0];
-
         setDir(coords);
     }
 
@@ -82,7 +80,9 @@ const EntityDetails = () => {
                 <Admin entity={entity} type={"entity"} />
             </Row>
             <Card body className="text-center my-2">
-                <h2>{entity.name}</h2>
+                <h2>
+                    {entity.name[0].toUpperCase() + entity.name.substring(1)}
+                </h2>
             </Card>
             <Tabs
                 defaultActiveKey="general"
@@ -143,7 +143,15 @@ const EntityDetails = () => {
                     </div>
                 </Tab>
                 <Tab eventKey="weather" title="Weather Forecast">
-                    {dir && <Weather dir={dir} entity={entity} />}
+                    {dir && (
+                        <Weather
+                            dir={dir}
+                            entityName={
+                                entity.name[0].toUpperCase() +
+                                entity.name.substring(1)
+                            }
+                        />
+                    )}
                 </Tab>
             </Tabs>
         </Container>
