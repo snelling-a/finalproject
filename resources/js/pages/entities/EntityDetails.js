@@ -85,13 +85,13 @@ const EntityDetails = () => {
                         rel="noreferrer"
                         href={`https://www.google.com/maps/dir/Current+Location/${dir.lat},${dir.lng}`}
                     >
-                        <Button variant="success">
+                        <Button variant="outline-success">
                             <MapFill /> Directions
                         </Button>
                     </a>
                 )}
 
-                <Button variant="danger" onClick={handleFavorite}>
+                <Button variant="outline-danger" onClick={handleFavorite}>
                     {favorite === 1 ? <HeartFill /> : <Heart />} Favorite
                 </Button>
 

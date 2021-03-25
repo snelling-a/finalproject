@@ -24,7 +24,6 @@ class FavoriteController extends Controller
 		
         // create new favorite in DB
         $favorite = new Favorite();
-        $favorite->favorite = 1;
         $favorite->user_id = Auth::id();
         $favorite->entity_id = $entity_id;
 
