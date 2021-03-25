@@ -21,6 +21,7 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
+const { greatCircleDistance } = require("great-circle-distance");
 import start from "./img/start.svg";
 import beer from "./img/beer.svg";
 
@@ -33,6 +34,24 @@ function Mapper(props) {
     const apiKey = apiKeyContext["REACT_APP_GOOGLE_API_KEY"];
 
     ////////// ////////// ////////// deterine start, end, zero
+
+    const coords = {
+        lat1: "12.9611159",
+        lng1: "77.6362214",
+        lat2: "12.9611159",
+        lng2: "75.6362214",
+    };
+
+    function isStartEnd() {
+        const coords = {
+            lat1: getStart().lat,
+            lng1: getStart().lng,
+            lat2: getEnd().lat,
+            lng2: getEnd().lng
+        };
+        if (greatCircleDistance(coords) < 0.2) return true;
+        return false;
+    }
 
     function getStart() {
         let start = polycoords[0];
@@ -67,9 +86,12 @@ function Mapper(props) {
             <GoogleMap defaultZoom={11} defaultCenter={getZero()}>
                 <Polyline
                     path={polycoords}
-                    color="#ae28ed"
-                    strokeOpacity={0.8}
-                    strokeWeight={2}
+                    geodesic={true}
+                    options={{
+                        strokeColor: "#8f4ad3",
+                        strokeOpacity: 0.75,
+                        strokeWeight: 3,
+                    }}
                 />
                 <Marker
                     position={getStart()}
@@ -81,13 +103,13 @@ function Mapper(props) {
                 <InfoWindow position={getZero()}>
                     <div>zero here</div>
                 </InfoWindow>
-                <Marker
+                {!isStartEnd && ( <Marker
                     position={getEnd()}
                     icon={{
                         url: beer,
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
-                />
+                />)}
             </GoogleMap>
         );
     }
