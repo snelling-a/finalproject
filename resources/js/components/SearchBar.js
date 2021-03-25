@@ -35,7 +35,7 @@ function SearchBar(props) {
                         onChange={handleChange}
                         value={query}
                     />
-                    <Button type="submit" variant="outline-success" size="sm">
+                    <Button type="submit" variant="outline-success">
                         Search
                     </Button>
                 </Form>
@@ -43,8 +43,7 @@ function SearchBar(props) {
                     name="reset"
                     type="submit"
                     variant="outline-danger"
-                    // className="mx-1"
-                    size="sm"
+                    className="ml-1"
                     onClick={(event) => {
                         setQuery("");
                         searchEntities(event);
