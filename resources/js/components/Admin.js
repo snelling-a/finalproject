@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { UserContext } from "../Hike";
-import Modal from "react-bootstrap/Modal";
 
 function Admin(props) {
     const user = useContext(UserContext);

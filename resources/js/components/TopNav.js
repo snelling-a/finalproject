@@ -4,9 +4,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../Hike";
 import Logout from "../pages/auth/Logout";
 
+<<<<<<< HEAD
 // export const SearchContext = createContext(null);
 
 function User(props) {
+=======
+function User() {
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
     const user = useContext(UserContext);
 
     if (user) {

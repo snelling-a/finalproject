@@ -5,16 +5,17 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import {
     GoogleMap,
     withScriptjs,
     withGoogleMap,
-    Polyline,
+    // Polyline,
     Marker,
     InfoWindow,
 } from "react-google-maps";
+import boots from "./img/boots.svg";
 
 import { GoogleContext } from "../Hike";
 
@@ -34,35 +35,26 @@ function BigMap(props) {
         const [selectedPoint, setSelectedPoint] = useState(null);
 
         // let pts = getPoints();
-        console.log(points);
 
         return (
             <GoogleMap
                 defaultZoom={7}
                 defaultCenter={{ lat: 49.81, lng: 15.47 }}
             >
-                {
-                    // console.log(pts)
-
-                    points &&
-                        points.map((point, index) => (
-                            <Marker
-                                key={index}
-                                position={JSON.parse(point.coordinates)[0]}
-                                onClick={() => {
-                                    setSelectedPoint(point);
-                                    console.log(selectedPoint);
-                                }}
-                                icon={{
-                                    url: "/boots.svg",
-                                    scaledSize: new window.google.maps.Size(
-                                        30,
-                                        30
-                                    ),
-                                }}
-                            />
-                        ))
-                }
+                {points &&
+                    points.map((point, index) => (
+                        <Marker
+                            key={index}
+                            position={JSON.parse(point.coordinates)[0]}
+                            onClick={() => {
+                                setSelectedPoint(point);
+                            }}
+                            icon={{
+                                url: boots,
+                                scaledSize: new window.google.maps.Size(30, 30),
+                            }}
+                        />
+                    ))}
 
                 {selectedPoint && (
                     <InfoWindow

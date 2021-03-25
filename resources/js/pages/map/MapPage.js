@@ -19,23 +19,24 @@ const MapPage = () => {
         setPoints(listPoints(data));
     }
 
-    function listPoints (data) {
-
-        // return data.map(e => 
+    function listPoints(data) {
+        // return data.map(e =>
         //     JSON.parse(e.coordinates)[0]
         //     );
-        return data.map(e => e
-            );
-
+        return data.map((e) => e);
     }
 
     useEffect(() => {
         fetchEntities();
     }, []);
 
-    useEffect(() => {
-        // console.log(points);
-    }, [points]);
+    /**
+     * what does this do?
+     */
+
+    // useEffect(() => {
+    //     // console.log(points);
+    // }, [points]);
 
     return (
         <Container fluid>

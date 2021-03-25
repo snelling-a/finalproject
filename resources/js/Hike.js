@@ -22,7 +22,10 @@ export const GoogleContext = createContext(null);
 
 const Hike = (props) => {
     const key = props.config;
+<<<<<<< HEAD
     // console.log(props.config);
+=======
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
 
     const [user, setUser] = useState(null);
     const [search, setSearch] = useState("");

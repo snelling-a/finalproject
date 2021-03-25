@@ -7,11 +7,11 @@ function Favorites() {
     const [favorites, setFavorites] = useState(null);
     async function fetchFavorites() {
         // let id = user;
-        console.log(user);
+
         const url = `/api/my_favorites`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
+
         setFavorites(data);
     }
 

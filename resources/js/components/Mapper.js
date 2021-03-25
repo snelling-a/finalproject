@@ -21,7 +21,13 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
+<<<<<<< HEAD
 import { GeoAlt } from "react-bootstrap-icons";
+=======
+import start from "./img/start.svg";
+import beer from "./img/beer.svg";
+
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
 import { GoogleContext } from "../Hike";
 
 function Mapper(props) {
@@ -34,13 +40,13 @@ function Mapper(props) {
 
     function getStart() {
         let start = polycoords[0];
-        console.log(start);
+
         return start;
     }
     function getEnd() {
         const length = polycoords.length;
         let end = polycoords[length - 1];
-        console.log(end);
+
         return end;
     }
     function getZero() {
@@ -51,9 +57,6 @@ function Mapper(props) {
             wipLat.push(polycoords[i]["lat"]);
             wipLng.push(polycoords[i]["lng"]);
         }
-
-        console.log(wipLat);
-        console.log(wipLng);
 
         let zero = {
             lat: (Math.min(...wipLat) + Math.max(...wipLat)) / 2,
@@ -74,7 +77,11 @@ function Mapper(props) {
                 <Marker
                     position={getStart()}
                     icon={{
+<<<<<<< HEAD
                         url: "/startGeo.svg",
+=======
+                        url: start,
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
                 />
@@ -85,7 +92,11 @@ function Mapper(props) {
                 <Marker
                     position={getEnd()}
                     icon={{
+<<<<<<< HEAD
                         url: "/endGeo.svg",
+=======
+                        url: beer,
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
                         scaledSize: new window.google.maps.Size(30, 30),
                     }}
                 />
@@ -93,8 +104,7 @@ function Mapper(props) {
         );
     }
     const WrappedMap = withScriptjs(withGoogleMap(Map));
-    console.log("google key", process.env.REACT_APP_GOOGLE_KEY);
-    console.log(process.env);
+
     return (
         <>
             <div className="Mapper" style={{ width: "100%", height: "40vh" }}>

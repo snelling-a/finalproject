@@ -53,16 +53,16 @@ function EntitySubmit() {
             setStatus("Converting to GeoJSON");
 
             const geoJson = kml(xml);
-            console.log(geoJson);
-            setStatus('Success');
 
-            const coordsR = geoJson.features[geoJson.features.length -1].geometry.coordinates;
+            setStatus("Success");
 
-            console.log(coordsR);
+            const coordsR =
+                geoJson.features[geoJson.features.length - 1].geometry
+                    .coordinates;
 
             let coords = coordsR.map((point) => ({
                 lng: point[0],
-                lat: point[1]
+                lat: point[1],
                 // elv: feature.geometry.coordinates[2],     //// WIP
             }));
 
@@ -70,9 +70,6 @@ function EntitySubmit() {
 
             // all form data to POST
             sendToServer(request_data);
-
-            
-            
         };
 
         reader.readAsText(file);

@@ -11,6 +11,7 @@ const Homecard = (props) => {
                 <Card.Title className="">{name}</Card.Title>
 
                 <Card.Img
+<<<<<<< HEAD
                     fluid
                     variant="top"
                     className="mw-100"
@@ -21,6 +22,11 @@ const Homecard = (props) => {
                         overflow: "hidden",
                     }}
                     src={photo && photo}
+=======
+                    variant="top"
+                    src={photo && photo}
+                    style={{ maxHeight: "100%", overflow: "hidden", flex: 1 }}
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
                 />
 
                 <Card.Text className="p-1">{description}</Card.Text>

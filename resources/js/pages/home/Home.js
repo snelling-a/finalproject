@@ -10,7 +10,10 @@ import SearchContext from "../../Hike";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
+<<<<<<< HEAD
     const search = useContext(SearchContext);
+=======
+>>>>>>> d6f116fa8434a96cbfed89bc736d4993e89b9d59
 
     // state section
     const [entities, setEntities] = useState({});
@@ -56,7 +59,11 @@ const Home = (props) => {
                 }}
             >
                 <span>
-                    <ArrowUpCircle class="text-dark" width="32" height="32" />
+                    <ArrowUpCircle
+                        className="text-dark"
+                        width="32"
+                        height="32"
+                    />
                 </span>
             </ScrollToTop>
         </Container>

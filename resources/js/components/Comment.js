@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Hike";
 
