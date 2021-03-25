@@ -7,6 +7,7 @@ import {
     Card,
     Tabs,
     Tab,
+    Spinner,
 } from "react-bootstrap";
 import { Heart, HeartFill } from "react-bootstrap-icons";
 
@@ -55,9 +56,9 @@ const EntityDetails = () => {
     }
 
     const content = !entity ? (
-        <div>
-            <h1>loading...</h1>
-        </div>
+        <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     ) : (
         <Container className="px-4">
             <Row>

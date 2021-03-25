@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { GoogleContext } from "../Hike";
 
 //maps
@@ -142,13 +142,20 @@ function BigMap(props) {
                             setSelectedPoint(null);
                         }}
                     >
-                        <div>
-                            Name: {selectedPoint.name} <br />
-                            Description: {selectedPoint.description} <br />
-                            <LinkContainer to={"/details/" + selectedPoint.id}>
-                                <Button variant="success">Find out more</Button>
-                            </LinkContainer>
-                        </div>
+                        <Card style={{ width: "18rem" }}>
+                            <Card.Img
+                                variant="top"
+                                src={selectedPoint.photo}
+                                style={{ filter: "brightness(30%)" }}
+                            />
+                            <Card.ImgOverlay style={{ color: "white" }}>
+                                <Card.Title>{selectedPoint.name}</Card.Title>
+                                <Card.Text>
+                                    {selectedPoint.description}
+                                </Card.Text>
+                                <Button variant="primary">Find out more</Button>
+                            </Card.ImgOverlay>
+                        </Card>
                     </InfoWindow>
                 )}
             </GoogleMap>
