@@ -1,7 +1,7 @@
 import React from "react";
 import ReactWeather, { useWeatherBit } from "react-open-weather";
 
-const Weather = () => {
+const Weather = (props) => {
     // later want to insert the lat and lng in as props of this
     // custom styling for the display
     const customStyles = {
@@ -24,18 +24,17 @@ const Weather = () => {
         forecastIconColor: "#4BC4F7",
     };
 
+    // const name = props.entity.name.
+
     const { data, isLoading, errorMessage } = useWeatherBit({
         key: "4a383f2cbc2d4879abaa67610f4e5406",
 
-        // these to be changed by props later
-        lat: "50.0755",
-        lon: "14.4378",
+        lat: props.dir.lat,
+        lon: props.dir.lng,
 
         lang: "en",
         unit: "M", // values are (M,S,I)
     });
-
-
 
     return (
         <div className="w-100 h-75">
@@ -43,7 +42,7 @@ const Weather = () => {
                 theme={customStyles}
                 data={data}
                 lang="en"
-                locationLabel="Prague"
+                locationLabel={props.entity.name}
                 unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
                 showForecast
             />

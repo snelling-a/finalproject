@@ -43,7 +43,7 @@ const EntityDetails = () => {
     useEffect(() => {
         fetchEntity();
     }, []);
-    console.log(dir);
+
     function handleFavorite() {
         // // let id = user;
         // console.log(user);
@@ -143,11 +143,7 @@ const EntityDetails = () => {
                     </div>
                 </Tab>
                 <Tab eventKey="weather" title="Weather Forecast">
-                    <div>
-                        <Weather />
-                    </div>
-
-                    <Button variant="success">Gallery</Button>
+                    {dir && <Weather dir={dir} entity={entity} />}
                 </Tab>
             </Tabs>
         </Container>
