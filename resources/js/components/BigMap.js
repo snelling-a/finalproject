@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+
 import { Button, Card } from "react-bootstrap";
 import { GoogleContext } from "../Hike";
 
@@ -25,6 +27,7 @@ function BigMap(props) {
     const apiKey = useContext(GoogleContext);
 
     let points = props.points;
+    const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
     // google react maps
 
@@ -141,11 +144,20 @@ function BigMap(props) {
                                 style={{ filter: "brightness(30%)" }}
                             />
                             <Card.ImgOverlay style={{ color: "white" }}>
-                                <Card.Title>{selectedPoint.name}</Card.Title>
+                                <Card.Title>
+                                    {firstToUpper(selectedPoint.name)}
+                                </Card.Title>
                                 <Card.Text>
-                                    {selectedPoint.description}
+                                    {firstToUpper(selectedPoint.description)}
                                 </Card.Text>
-                                <Button variant="primary">Find out more</Button>
+
+                                <LinkContainer
+                                    to={`/details/${selectedPoint.id}`}
+                                >
+                                    <Button variant="primary">
+                                        Find out more
+                                    </Button>
+                                </LinkContainer>
                             </Card.ImgOverlay>
                         </Card>
                     </InfoWindow>
