@@ -99,9 +99,6 @@ function Mapper(props) {
                     }}
                 />
 
-                <InfoWindow position={getZero()}>
-                    <div>zero here</div>
-                </InfoWindow>
                 {!isStartEnd && (
                     <Marker
                         position={getEnd()}

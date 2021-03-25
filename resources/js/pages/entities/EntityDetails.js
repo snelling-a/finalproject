@@ -8,11 +8,10 @@ import {
     Tabs,
     Tab,
 } from "react-bootstrap";
-import { Heart, HeartFill } from "react-bootstrap-icons";
+import { Heart, HeartFill, MapFill } from "react-bootstrap-icons";
 
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-// import { LinkContainer } from "react-router-bootstrap";
 import Weather from "../../components/Weather";
 import Comment from "../../components/Comment";
 import { UserContext } from "../../Hike";
@@ -34,6 +33,13 @@ const EntityDetails = () => {
         const response = await fetch(url);
         const data = await response.json();
         setEntity(data);
+
+        if (data.favorites.length) {
+            setFavorite(1);
+        } else {
+            setFavorite(0);
+        }
+
         let coords = JSON.parse(data.coordinates)[0];
         setDir(coords);
     }
@@ -42,14 +48,22 @@ const EntityDetails = () => {
         fetchEntity();
     }, []);
 
-    function handleFavorite() {
-        // // let id = user;
-        // console.log(user);
-        // const url = `/api/my_favorites`;
-        // const response = await fetch(url);
-        // const data = await response.json();
-        // console.log(data);
-        favorite === 1 ? setFavorite(0) : setFavorite(1);
+    async function handleFavorite() {
+        const url = `/api/favorite/update/${id}`;
+        const response = await fetch(url, {
+            method: "POST",
+
+            headers: {
+                Accept: "application/json",
+                "Content-type": "application/json",
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content"),
+            },
+        });
+
+        const data = await response.json();
+        data.status == "created" ? setFavorite(1) : setFavorite(0);
     }
 
     const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
@@ -70,13 +84,14 @@ const EntityDetails = () => {
                         rel="noreferrer"
                         href={`https://www.google.com/maps/dir/Current+Location/${dir.lat},${dir.lng}`}
                     >
-                        <Button variant="success">Directions</Button>
+                        <Button variant="success">
+                            <MapFill /> Directions
+                        </Button>
                     </a>
                 )}
-                {/* <Button variant="success">Download</Button> */}
 
-                <Button variant="outline-danger" onClick={handleFavorite}>
-                    {favorite === 1 ? <HeartFill /> : <Heart />}
+                <Button variant="danger" onClick={handleFavorite}>
+                    {favorite === 1 ? <HeartFill /> : <Heart />} Favorite
                 </Button>
 
                 <Admin entity={entity} type={"entity"} />
@@ -101,10 +116,6 @@ const EntityDetails = () => {
                 <Tab eventKey="desc" title="Description">
                     <div>{entity.description}</div>
                 </Tab>
-
-                {/* <Tab eventKey="general" title="General Info">
-                    <div>?? what goes here ??</div>
-                </Tab> */}
 
                 <Tab eventKey="reviews" title="Reviews">
                     <Container>
@@ -143,18 +154,6 @@ const EntityDetails = () => {
                         </Row>
                     </Container>
                 </Tab>
-
-                {/* <Tab eventKey="weather" title="Weather Forecast">
-                    {dir && (
-                        <Weather
-                            dir={dir}
-                            entityName={
-                                entity.name[0].toUpperCase() +
-                                entity.name.substring(1)
-                            }
-                        />
-                    )}
-                </Tab> */}
             </Tabs>
         </Container>
     );

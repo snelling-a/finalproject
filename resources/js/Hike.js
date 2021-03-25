@@ -46,7 +46,7 @@ const Hike = (props) => {
                 <GoogleContext.Provider value={googleKey}>
                     <TopNav />
 
-                    <Container className="mt-3 pt-5">
+                    <Container className="mt-3 pt-5 px-0">
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/map" component={MapPage} />

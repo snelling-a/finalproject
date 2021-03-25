@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Card, Button, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-// import { UserContext } from "../../Hike";
 
 function Favorites() {
-    // const user = useContext(UserContext);
     const [favorites, setFavorites] = useState(null);
     async function fetchFavorites() {
-        const url = `/api/my_favorites`;
+        const url = `/api/favorite/fetch`;
         const response = await fetch(url);
         const data = await response.json();
 
         setFavorites(data);
+        console.log(data);
     }
 
     useEffect(() => {
@@ -29,7 +28,6 @@ function Favorites() {
                         <Card
                             style={{ width: "18rem" }}
                             key={i}
-                            // className="d-flex flex-column justify-content-between m-1 p-2"
                             className="m-1 shadow"
                         >
                             {" "}

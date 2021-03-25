@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Form, FormControl } from "react-bootstrap";
+import { Button, Container, Form, FormControl, Row } from "react-bootstrap";
 
 function SearchBar(props) {
     const [query, setQuery] = useState("");
@@ -24,26 +24,24 @@ function SearchBar(props) {
     };
 
     return (
-        <>
-            <Container fluid className="d-flex justify-content-center">
-                <Form inline onSubmit={searchEntities}>
-                    <FormControl
-                        type="text"
-                        placeholder="Search"
-                        className="mr-sm-2 "
-                        name="search"
-                        onChange={handleChange}
-                        value={query}
-                    />
-                    <Button type="submit" variant="outline-success">
-                        Search
-                    </Button>
-                </Form>
+        <Container fluid className="d-flex justify-content-center">
+            <Form inline onSubmit={searchEntities}>
+                <FormControl
+                    type="text"
+                    placeholder="Search"
+                    className="m-1 "
+                    name="search"
+                    onChange={handleChange}
+                    value={query}
+                />
+
+                <Button type="submit" variant="outline-success" className="m-1">
+                    Search
+                </Button>
                 <Button
                     name="reset"
-                    type="submit"
                     variant="outline-danger"
-                    className="ml-1"
+                    className="m-1"
                     onClick={(event) => {
                         setQuery("");
                         searchEntities(event);
@@ -51,8 +49,8 @@ function SearchBar(props) {
                 >
                     Reset
                 </Button>
-            </Container>
-        </>
+            </Form>
+        </Container>
     );
 }
 

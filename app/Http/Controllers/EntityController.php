@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entity;
 use Illuminate\Http\Request;
+use Auth;
 
 class EntityController extends Controller
 {
@@ -18,7 +19,9 @@ class EntityController extends Controller
     public function details(Request $request, $id)
     {
        
-        $details = Entity::with('comments.user')->findOrFail($id);
+        $details = Entity::with(['favorites' => function ($query) {
+			$query->where('user_id', Auth::id());
+		}])->with('comments.user')->with('favorites.user')->findOrFail($id);
        
         return $details;
     }

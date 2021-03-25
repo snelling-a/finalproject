@@ -39,9 +39,9 @@ const MapPage = () => {
     // }, [points]);
 
     return (
-        <Container fluid>
-            <h1>Map Page</h1>
-            <Container fluid>
+        <Container fluid className="px-0">
+            <h1 className="p-2">Map Page</h1>
+            <Container fluid className="px-0">
                 <BigMap points={points} />
 
                 <Container fluid>

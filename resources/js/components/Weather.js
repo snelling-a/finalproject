@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ReactWeather, { useWeatherBit } from "react-open-weather";
 import { WeatherContext } from "../Hike";
+import { Container } from "react-bootstrap";
 
 const Weather = (props) => {
     // later want to insert the lat and lng in as props of this
@@ -38,7 +39,7 @@ const Weather = (props) => {
     });
 
     return (
-        <div className="w-100 h-75">
+        <Container fluid>
             <ReactWeather
                 theme={customStyles}
                 data={data}
@@ -47,7 +48,7 @@ const Weather = (props) => {
                 unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
                 showForecast
             />
-        </div>
+        </Container>
     );
 };
 
