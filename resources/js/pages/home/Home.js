@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Car from "./Car";
 import Homecard from "./Homecard";
 import ScrollToTop from "react-scroll-up";
@@ -7,6 +7,7 @@ import { ArrowUpCircle } from "react-bootstrap-icons";
 
 import GoogleContext from "../../Hike";
 import SearchContext from "../../Hike";
+import SearchBar from "../../components/SearchBar";
 
 const Home = (props) => {
     const value = useContext(GoogleContext);
@@ -30,6 +31,10 @@ const Home = (props) => {
     return (
         <Container className="bg-light pb-2 my-2">
             <Car />
+            <SearchBar
+                setEntities={setEntities}
+                fetchEntities={fetchEntities}
+            />
             <Container>
                 {search && <div>Search context loaded</div>}
                 <Row xs={1} md={2}>

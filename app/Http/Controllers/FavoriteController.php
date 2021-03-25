@@ -13,7 +13,7 @@ class FavoriteController extends Controller
 	public function update(Request $request)
     {
        
-
+		
         // create new favorite in DB
 
         $favorite = new Favorite();
