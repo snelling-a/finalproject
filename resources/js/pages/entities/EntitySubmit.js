@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { UserContext } from "../../Hike";
 import { Link, Redirect } from "react-router-dom";
+import regions from "../../assets/regions.json";
 
 function EntitySubmit() {
     // state section
@@ -156,13 +157,18 @@ function EntitySubmit() {
                     <Form.Group controlId="region">
                         <Form.Label>Region</Form.Label>
                         <Form.Control
+                            as="select"
                             type="text"
                             name="region"
                             value={region}
                             onChange={handleChange}
                             required
-                        />
-
+                        >
+                            <option>-- Choose a Region --</option>
+                            {regions.map((region) => (
+                                <option key={region.code}>{region.name}</option>
+                            ))}
+                        </Form.Control>
                         <Form.Control.Feedback type="invalid">
                             Please provide a region.
                         </Form.Control.Feedback>
