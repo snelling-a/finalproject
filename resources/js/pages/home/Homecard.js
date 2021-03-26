@@ -3,7 +3,16 @@ import { Button, Card, ListGroup } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Homecard = (props) => {
-    const { photo, id, name, description, region, category } = props.data;
+    console.log("file: Homecard.js  line 6  Homecard  props", props);
+    const {
+        photo,
+        id,
+        name,
+        description,
+        region,
+        category,
+        rating,
+    } = props.data;
 
     const firstToUpper = (str) => str[0].toUpperCase() + str.substring(1);
 
@@ -23,13 +32,13 @@ const Homecard = (props) => {
                 </Card.Text>
                 <ListGroup variant="flush">
                     <ListGroup.Item className="py-2 px-1">
-                        Region: {firstToUpper(region)}
+                        {region && `Region: ${firstToUpper(region)}`}
                     </ListGroup.Item>
                     <ListGroup.Item className="py-2 px-1">
-                        Category: {firstToUpper(category)}
+                        {category && `Category: ${firstToUpper(category)}`}
                     </ListGroup.Item>
                     <ListGroup.Item className="py-2 px-1">
-                        Rating: 5/5
+                        {rating && `Rating: ${rating}/5`}
                     </ListGroup.Item>
                 </ListGroup>
             </Card.Body>
