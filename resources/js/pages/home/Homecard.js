@@ -39,8 +39,10 @@ const Homecard = (props) => {
                         {category && `Category: ${firstToUpper(category)}`}
                     </ListGroup.Item>
                     <ListGroup.Item className="py-2 px-1">
-                        {rating && `Rating: ${rating}/5`}{" "}
-                        <StarFill className="text-warning mb-1" />
+                        {rating &&
+                            `Rating: ${rating}/5 ${(
+                                <StarFill className="text-warning mb-1" />
+                            )}`}
                     </ListGroup.Item>
                 </ListGroup>
             </Card.Body>
