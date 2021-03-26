@@ -76,12 +76,42 @@ function Mapper(props) {
     // google react maps
 
     function Map() {
+
+        //wip
+        const [currentPosition, setCurrentPosition] = useState({});
+
+        const success = (position) => {
+            const currentPosition = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            setCurrentPosition(currentPosition);
+        };
+
+        useEffect(() => {
+            navigator.geolocation.getCurrentPosition(success);
+        });
+        //wip
+
         return (
             <GoogleMap
                 defaultZoom={11}
                 defaultCenter={getZero()}
                 mapTypeId={"terrain"}
             >
+                {currentPosition.lat && (
+                    <Marker
+                        position={currentPosition}
+                        icon={{
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 7,
+                            fillOpacity: 0.65,
+                            strokeWeight: 1.4,
+                            fillColor: "#5384ED",
+                            strokeColor: "#ffffff",
+                        }}
+                    />
+                )}
                 <Polyline
                     path={polycoords}
                     geodesic={true}
@@ -91,6 +121,7 @@ function Mapper(props) {
                         strokeWeight: 3,
                     }}
                 />
+                
                 <Marker
                     position={getStart()}
                     icon={{
