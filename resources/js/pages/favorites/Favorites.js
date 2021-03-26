@@ -11,7 +11,6 @@ function Favorites() {
         const data = await response.json();
 
         setFavorites(data);
-        console.log(data);
     }
 
     useEffect(() => {

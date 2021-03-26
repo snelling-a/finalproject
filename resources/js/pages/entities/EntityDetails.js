@@ -29,8 +29,6 @@ const EntityDetails = () => {
     const [dir, setDir] = useState(null);
     let { id } = useParams();
 
-    console.log(user);
-
     // Fetch entity data
     async function fetchEntity() {
         const url = `/api/details/${id}`;

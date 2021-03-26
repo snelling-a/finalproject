@@ -4,7 +4,6 @@ import { StarFill } from "react-bootstrap-icons";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Homecard = (props) => {
-    console.log("file: Homecard.js  line 6  Homecard  props", props);
     const {
         photo,
         id,

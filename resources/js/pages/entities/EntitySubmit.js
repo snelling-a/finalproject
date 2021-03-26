@@ -107,7 +107,7 @@ function EntitySubmit() {
         });
 
         // Redirect after submit
-        console.log("success, redirecting");
+
         location.href = "/";
     };
 
@@ -139,7 +139,6 @@ function EntitySubmit() {
                 return { ...prev_values, [name]: value };
             });
         }
-        console.log(name, rating);
     };
 
     return (
