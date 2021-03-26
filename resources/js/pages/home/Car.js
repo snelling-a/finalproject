@@ -3,7 +3,7 @@ import { Carousel } from "react-bootstrap";
 
 const Car = () => {
     return (
-        <Carousel className="shadow rounded w-100 my-3 ">
+        <Carousel className="shadow rounded w-100 h-100 my-1 ">
             <Carousel.Item>
                 <img
                     className="d-block w-100 rounded"
@@ -12,8 +12,10 @@ const Car = () => {
                 />
 
                 <Carousel.Caption>
-                    <h2>Find your next adventure!</h2>
-                    <p>Go for a relaxing walk in nature.</p>
+                    <h3>Find your next adventure!</h3>
+                    <p className="d-none  d-md-block">
+                        Go for a relaxing walk in nature.
+                    </p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -24,8 +26,10 @@ const Car = () => {
                 />
 
                 <Carousel.Caption>
-                    <h2>Relaxing walks</h2>
-                    <p>Go for a relaxing walk in nature.</p>
+                    <h3>Relaxing walks</h3>
+                    <p className="d-none  d-md-block">
+                        Go for a relaxing walk in nature.
+                    </p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -36,8 +40,8 @@ const Car = () => {
                 />
 
                 <Carousel.Caption>
-                    <h2>Explore</h2>
-                    <p>
+                    <h3>Explore</h3>
+                    <p className="d-none  d-md-block">
                         Visit interesting locations all around Czech Republic.
                     </p>
                 </Carousel.Caption>
@@ -49,8 +53,8 @@ const Car = () => {
                     alt="On a bike"
                 />
                 <Carousel.Caption>
-                    <h2>On your bike!</h2>
-                    <p>
+                    <h3>On your bike!</h3>
+                    <p className="d-none  d-md-block">
                         A bicycle ride around the world begins with a single
                         pedal stroke.
                     </p>

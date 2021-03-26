@@ -201,7 +201,7 @@ function EntitySubmit() {
                         >
                             <option value="">-- Choose a Category --</option>
                             <option value="easy">Easy</option>
-                            <option value="med">Medium</option>
+                            <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
                             <option value="bike">Bike</option>
                         </Form.Control>
