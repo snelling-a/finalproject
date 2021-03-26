@@ -37,7 +37,11 @@ function Admin(props) {
         <>
             {user && user.role === "admin" ? (
                 <>
-                    <Button variant="danger" onClick={handleShow}>
+                    <Button
+                        variant="danger"
+                        className="p-0"
+                        onClick={handleShow}
+                    >
                         Delete
                     </Button>
 

@@ -65,27 +65,14 @@ class EntityController extends Controller
         Entity::findOrFail($id)->delete();
     }
 
-    public function favoritePost(Entity $entity)
-    {
-        Auth::user()->favorites()->attach($entity->id);
-
-        return back();
-    }
-
-    public function unFavoritePost(Entity $entity)
-    {
-        Auth::user()->favorites()->detach($entity->id);
-
-        return back();
-    }
 
     public function search($query)
     {
 
-        return Entity::query()->where('name', 'LIKE', "%{$query}%")->orWhere('region', 'LIKE', "%{$query}%")->get();
+        return Entity::query()->where('name', 'LIKE', "%{$query}%")->orWhere('region', 'LIKE', "%{$query}%")->orWhere('category', 'LIKE', "%{$query}%")->get();
     }
 }
 
 
-// ->orWhere('category', 'LIKE', "%{$query}%")
-// ->orWhere('difficulty', 'LIKE', "%{$query}%")
+
+

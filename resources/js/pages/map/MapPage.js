@@ -15,14 +15,11 @@ const MapPage = () => {
         const response = await fetch(url);
 
         const data = await response.json();
-        // console.log(data);
+
         setPoints(listPoints(data));
     }
 
     function listPoints(data) {
-        // return data.map(e =>
-        //     JSON.parse(e.coordinates)[0]
-        //     );
         return data.map((e) => e);
     }
 
@@ -30,39 +27,10 @@ const MapPage = () => {
         fetchEntities();
     }, []);
 
-    /**
-     * what does this do?
-     */
-
-    // useEffect(() => {
-    //     // console.log(points);
-    // }, [points]);
-
     return (
         <Container fluid className="px-0">
-            <h1 className="p-2">Map Page</h1>
             <Container fluid className="px-0">
                 <BigMap points={points} />
-
-                <Container fluid>
-                    <h5 className="pt-2">Filter by type</h5>
-
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item
-                            action
-                            href="#link1"
-                            className="p-2 mw-25"
-                        >
-                            All
-                        </ListGroup.Item>
-                        <ListGroup.Item action href="#link2" className="p-2">
-                            Trails
-                        </ListGroup.Item>
-                        <ListGroup.Item action href="#link3" className="p-2">
-                            Destinations
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Container>
             </Container>
         </Container>
     );

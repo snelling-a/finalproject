@@ -7,9 +7,10 @@ import {
     Card,
     Tabs,
     Tab,
+    OverlayTrigger,
 } from "react-bootstrap";
 import { Heart, HeartFill, MapFill } from "react-bootstrap-icons";
-
+import Popover from "react-bootstrap/Popover";
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Weather from "../../components/Weather";
@@ -27,6 +28,8 @@ const EntityDetails = () => {
     const [favorite, setFavorite] = useState(0);
     const [dir, setDir] = useState(null);
     let { id } = useParams();
+
+    console.log(user);
 
     // Fetch entity data
     async function fetchEntity() {
@@ -49,11 +52,15 @@ const EntityDetails = () => {
         fetchEntity();
     }, []);
 
+    const popOver = (
+        <Popover id="popover-basic">
+            <Popover.Content>Please register to add favorites!</Popover.Content>
+        </Popover>
+    );
     async function handleFavorite() {
         const url = `/api/favorite/update/${id}`;
         const response = await fetch(url, {
             method: "POST",
-
             headers: {
                 Accept: "application/json",
                 "Content-type": "application/json",
@@ -72,7 +79,7 @@ const EntityDetails = () => {
     const content = !entity ? (
         <BSSpinner />
     ) : (
-        <Container className="px-4">
+        <Container className="px-1">
             <Row>
                 <Mapper entity={entity} />
             </Row>
@@ -89,10 +96,21 @@ const EntityDetails = () => {
                     </a>
                 )}
 
-                <Button variant="outline-danger" onClick={handleFavorite}>
-                    {favorite === 1 ? <HeartFill /> : <Heart />} Favorite
-                </Button>
-
+                {user ? (
+                    <Button variant="outline-danger" onClick={handleFavorite}>
+                        {favorite === 1 ? <HeartFill /> : <Heart />} Favorite
+                    </Button>
+                ) : (
+                    <OverlayTrigger
+                        trigger="click"
+                        placement="top"
+                        overlay={popOver}
+                    >
+                        <Button variant="outline-danger">
+                            <Heart /> Favorite
+                        </Button>
+                    </OverlayTrigger>
+                )}
                 <Admin entity={entity} type={"entity"} />
             </Row>
             <Card body className="text-center my-2">
@@ -101,7 +119,7 @@ const EntityDetails = () => {
             <Tabs
                 defaultActiveKey="weather"
                 id="uncontrolled-tab-example"
-                className="text-center my-2"
+                className="text-center my-2 px-1"
             >
                 <Tab eventKey="weather" title="Weather Forecast">
                     {dir && (
@@ -113,12 +131,12 @@ const EntityDetails = () => {
                 </Tab>
 
                 <Tab eventKey="desc" title="Description">
-                    <div>{entity.description}</div>
+                    <div className="px-2">{entity.description}</div>
                 </Tab>
 
                 <Tab eventKey="reviews" title="Reviews">
-                    <Container>
-                        <h1 className="mt-2">Reviews</h1>
+                    <Container className="px-0">
+                        {/*                     
                         <Row>
                             <Col>
                                 <h3>Username</h3>
@@ -126,29 +144,39 @@ const EntityDetails = () => {
                             <Col sm={8}>
                                 <h3>Review</h3>
                             </Col>
-                        </Row>
+                        </Row> */}
                         {entity.comments &&
                             entity.comments.map((comment) => (
-                                <Row key={comment.id}>
-                                    <Col>{comment.user.username}</Col>
-                                    <Col sm={8}>
+                                <Row
+                                    key={comment.id}
+                                    className="my-1 px-0 mx-0 "
+                                >
+                                    <Row
+                                        className=" px-2 mx-0 d-flex justify-content-between w-100 text-muted"
+                                        fluid
+                                    >
+                                        <span>{comment.user.username}</span>
+                                        <span>
+                                            <Moment fromNow ago>
+                                                {comment.created_at}
+                                            </Moment>{" "}
+                                            ago
+                                        </span>
+                                    </Row>
+                                    <Row xs={4} className="px-2 mx-0 ">
                                         {comment.comment}{" "}
-                                        <Moment fromNow ago>
-                                            {comment.created_at}
-                                        </Moment>{" "}
-                                        ago
-                                    </Col>
+                                    </Row>
                                     <Admin comment={comment} type={"comment"} />
                                 </Row>
                             ))}
                     </Container>
 
-                    <Comment id={id} />
+                    <Comment id={id} className="mb-1" />
                 </Tab>
 
                 <Tab eventKey="gallery" title="Gallery">
                     <Container>
-                        <Row xs={1} md={2}>
+                        <Row xs={1} md={2} className="px-2">
                             <Image src={entity.photo} rounded />
                         </Row>
                     </Container>

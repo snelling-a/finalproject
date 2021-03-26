@@ -24,14 +24,6 @@ const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        /* FROM BOOTSTRAP DOCS */
-        // const form = event.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        //     console.log(1);
-        // }
-
         setValidated(true);
 
         let request_data = { email, username, password, password_confirmation };
@@ -76,17 +68,21 @@ const Register = () => {
     };
     return (
         <Container className="d-flex flex-column align-items-center flex-nowrap">
-            <Form.Label className="form-control-lg text-center">
-                Register an account to submit new destinations, leave ratings
-                and save your favorite destinations!
-            </Form.Label>
+            <Container>
+                <h5>
+                    {" "}
+                    Register an account to submit new destinations, leave
+                    ratings and save your favorite destinations!
+                </h5>
+            </Container>
+
             <Form
                 noValidate
                 validated={validated}
                 action="/register"
                 method="post"
                 onSubmit={handleSubmit}
-                className=" w-50"
+                className="w-75"
             >
                 <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
@@ -95,8 +91,6 @@ const Register = () => {
                             <InputGroup.Text>🌄</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
-                            // id="inlineFormInputGroup"
-                            // placeholder="HikeCzech"
                             type="text"
                             value={username}
                             name="username"
@@ -112,7 +106,6 @@ const Register = () => {
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                         type="email"
-                        // placeholder="name@example.com"
                         name="email"
                         value={email}
                         onChange={handleChange}
@@ -123,32 +116,30 @@ const Register = () => {
                     </Form.Control.Feedback>
                 </Form.Group>
                 <>
-                    <Form.Label /* htmlFor="inputPassword5" */>
-                        Password
-                    </Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
-                        // id="inputPassword5"
                         aria-describedby="passwordHelpBlock"
                         value={password}
                         name="password"
                         onChange={handleChange}
+						required
                         // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,20}$"
                     />
-                    <Form.Text /* id="passwordHelpBlock" */ muted>
+                    <Form.Text muted>
                         Your password must be 8-20 characters long, contain
                         letters and numbers, and must not contain spaces,
                         special characters, or emoji.
                     </Form.Text>
                 </>
-                <Form.Group /* controlId="formBasicPassword" */>
+                <Form.Group>
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                         type="password"
-                        // placeholder="Confirm Password"
                         value={password_confirmation}
                         name="password_confirmation"
                         onChange={handleChange}
+						required
                     />
                 </Form.Group>
                 <Button variant="success" type="submit">
