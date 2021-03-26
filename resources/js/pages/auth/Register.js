@@ -69,7 +69,7 @@ const Register = () => {
     return (
         <Container className="d-flex flex-column align-items-center flex-nowrap">
             <Container>
-                <h5>
+                <h5 className="text-center">
                     {" "}
                     Register an account to submit new destinations, leave
                     ratings and save your favorite destinations!
@@ -123,7 +123,7 @@ const Register = () => {
                         value={password}
                         name="password"
                         onChange={handleChange}
-						required
+                        required
                         // pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,20}$"
                     />
                     <Form.Text muted>
@@ -139,7 +139,7 @@ const Register = () => {
                         value={password_confirmation}
                         name="password_confirmation"
                         onChange={handleChange}
-						required
+                        required
                     />
                 </Form.Group>
                 <Button variant="success" type="submit">
