@@ -179,7 +179,7 @@ function EntitySubmit() {
                             onChange={handleChange}
                             required
                         >
-                            <option>-- Choose a Region --</option>
+                            <option value="">-- Choose a Region --</option>
                             {regions.map((region) => (
                                 <option key={region.code}>{region.name}</option>
                             ))}
@@ -199,7 +199,7 @@ function EntitySubmit() {
                             onChange={handleChange}
                             required
                         >
-                            <option>-- Choose a Category --</option>
+                            <option value="">-- Choose a Category --</option>
                             <option value="easy">Easy</option>
                             <option value="med">Medium</option>
                             <option value="hard">Hard</option>
@@ -220,7 +220,7 @@ function EntitySubmit() {
                             required
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a photo.
+                            Please provide a link to your photo.
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>

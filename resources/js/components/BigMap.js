@@ -36,9 +36,9 @@ function BigMap(props) {
 
         return (
             <GoogleMap
-                defaultZoom={7}
+                defaultZoom={6}
                 defaultCenter={{ lat: 49.81, lng: 15.47 }}
-                mapTypeId={"terrain"}
+                mapTypeId={"roadmap"}
             >
                 {points &&
                     points.map((point, index) => {
@@ -150,11 +150,14 @@ function BigMap(props) {
                                 <Card.Text>
                                     {firstToUpper(selectedPoint.description)}
                                 </Card.Text>
+                                <Card.Text>
+                                    {firstToUpper(selectedPoint.category)}
+                                </Card.Text>
 
                                 <LinkContainer
                                     to={`/details/${selectedPoint.id}`}
                                 >
-                                    <Button variant="primary">
+                                    <Button variant="success">
                                         Find out more
                                     </Button>
                                 </LinkContainer>
@@ -170,7 +173,7 @@ function BigMap(props) {
 
     return (
         <>
-            <div className="Mapper" style={{ width: "100%", height: "60vh" }}>
+            <div className="Mapper" style={{ width: "100%", height: "90vh" }}>
                 <WrappedMap
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${apiKey}`}
                     loadingElement={<div style={{ height: `100%` }} />}

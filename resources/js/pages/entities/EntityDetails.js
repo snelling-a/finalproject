@@ -103,7 +103,7 @@ const EntityDetails = () => {
                 ) : (
                     <OverlayTrigger
                         trigger="click"
-                        placement="right"
+                        placement="top"
                         overlay={popOver}
                     >
                         <Button variant="outline-danger">
