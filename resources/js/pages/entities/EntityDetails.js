@@ -9,7 +9,7 @@ import {
     Tab,
     OverlayTrigger,
 } from "react-bootstrap";
-import { Heart, HeartFill, MapFill } from "react-bootstrap-icons";
+import { Heart, HeartFill, MapFill, StarFill } from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
@@ -131,7 +131,24 @@ const EntityDetails = () => {
                 </Tab>
 
                 <Tab eventKey="desc" title="Description">
-                    <div className="px-2">{entity.description}</div>
+                    <h4 className="px-2">
+                        {" "}
+                        Description:{" "}
+                        <span className="text-secondary">
+                            {entity.description}
+                        </span>
+                    </h4>
+                    <h4 className="px-2">
+                        Rating:{" "}
+                        <span className="text-secondary">
+                            {entity.rating}/5
+                        </span>
+                        <StarFill className="text-warning mb-2 ml-1" />
+                    </h4>
+                    <h4 className="px-2">
+                        Region:{" "}
+                        <span className="text-secondary">{entity.region}</span>
+                    </h4>
                 </Tab>
 
                 <Tab eventKey="reviews" title="Reviews">
