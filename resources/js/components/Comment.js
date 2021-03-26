@@ -28,7 +28,7 @@ const Comment = (props) => {
         });
 
         // Redirect after submit
-        console.log("success, redirecting");
+
         location.href = `/details/${id}`;
     };
 
