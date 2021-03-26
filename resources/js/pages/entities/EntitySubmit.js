@@ -17,11 +17,12 @@ function EntitySubmit() {
     const [status, setStatus] = useState("No file selected");
     const [errors, setErrors] = useState(null);
     const [validated, setValidated] = useState(false);
-    const [{ name, region, photo, description }, setData] = useState({
+    const [{ name, region, photo, description, category }, setData] = useState({
         name: "",
         region: "",
         photo: "",
         description: "",
+        category: "",
     });
 
     const user = useContext(UserContext);
@@ -67,7 +68,14 @@ function EntitySubmit() {
                 // elv: feature.geometry.coordinates[2],     //// WIP
             }));
 
-            let request_data = { name, region, photo, description, coords };
+            let request_data = {
+                name,
+                region,
+                photo,
+                description,
+                coords,
+                category,
+            };
 
             // all form data to POST
             sendToServer(request_data);
@@ -112,7 +120,13 @@ function EntitySubmit() {
 
     // handle inputs from form
     const handleChange = (event) => {
-        const allowed_names = ["name", "region", "photo", "description"],
+        const allowed_names = [
+                "name",
+                "region",
+                "photo",
+                "description",
+                "category",
+            ],
             name = event.target.name,
             value = event.target.value;
 
@@ -121,6 +135,7 @@ function EntitySubmit() {
                 return { ...prev_values, [name]: value };
             });
         }
+        console.log(name, region, photo, description, category);
     };
 
     return (
@@ -173,6 +188,28 @@ function EntitySubmit() {
                             Please provide a region.
                         </Form.Control.Feedback>
                     </Form.Group>
+
+                    <Form.Group controlId="category">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Control
+                            as="select"
+                            type="text"
+                            name="category"
+                            value={category}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option>-- Choose a Category --</option>
+                            <option value="easy">Easy</option>
+                            <option value="med">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="bike">Bike</option>
+                        </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a category.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
                     <Form.Group controlId="photo">
                         <Form.Label>Photo</Form.Label>
                         <Form.Control

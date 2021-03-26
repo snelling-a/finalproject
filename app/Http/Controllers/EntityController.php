@@ -12,17 +12,17 @@ class EntityController extends Controller
     public function fetch(Request $request)
     {
         $entities = Entity::get();
-  
+
         return $entities;
     }
 
     public function details(Request $request, $id)
     {
-       
+
         $details = Entity::with(['favorites' => function ($query) {
-			$query->where('user_id', Auth::id());
-		}])->with('comments.user')->with('favorites.user')->findOrFail($id);
-       
+            $query->where('user_id', Auth::id());
+        }])->with('comments.user')->with('favorites.user')->findOrFail($id);
+
         return $details;
     }
 
@@ -32,10 +32,12 @@ class EntityController extends Controller
         //Validate input
         $this->validate($request, [
             'name' => 'required|min:0|max:100',
-            'region' => 'required|min:0|max:100',
+            'region' => 'required',
             'photo' => 'required|min:0',
             'description' => 'required|min:0|max:250',
             'coords' => 'required',
+            'category' => 'required',
+
         ]);
 
         // create entity in DB
@@ -44,6 +46,8 @@ class EntityController extends Controller
         $entity->region =  $request->region;
         $entity->photo =  $request->photo;
         $entity->description = $request->description;
+        $entity->category = $request->category;
+
         $entity->coordinates = json_encode($request->coords);
 
 
@@ -61,23 +65,24 @@ class EntityController extends Controller
         Entity::findOrFail($id)->delete();
     }
 
-	public function favoritePost(Entity $entity)
-	{
-		Auth::user()->favorites()->attach($entity->id);
+    public function favoritePost(Entity $entity)
+    {
+        Auth::user()->favorites()->attach($entity->id);
 
-		return back();
-	}
+        return back();
+    }
 
-		public function unFavoritePost(Entity $entity)
-	{
-		Auth::user()->favorites()->detach($entity->id);
+    public function unFavoritePost(Entity $entity)
+    {
+        Auth::user()->favorites()->detach($entity->id);
 
-		return back();
-	}
+        return back();
+    }
 
-	public function search($query) { 
-		
-			return Entity::query()->where('name', 'LIKE', "%{$query}%")->orWhere('region', 'LIKE', "%{$query}%")->get();
+    public function search($query)
+    {
+
+        return Entity::query()->where('name', 'LIKE', "%{$query}%")->orWhere('region', 'LIKE', "%{$query}%")->get();
     }
 }
 
