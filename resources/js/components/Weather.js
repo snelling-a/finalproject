@@ -39,7 +39,7 @@ const Weather = (props) => {
     });
 
     return (
-        <Container fluid>
+        <Container fluid className="px-1">
             <ReactWeather
                 theme={customStyles}
                 data={data}

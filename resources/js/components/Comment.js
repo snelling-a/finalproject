@@ -8,13 +8,6 @@ const Comment = (props) => {
     const { id } = props;
     const [comment, setComment] = useState("");
 
-    // const [errors, setErrors] = useState(null);
-    // const [data, setData] = useState(null);
-
-    /**
-     * added event as arument for handleSubmit
-     * moved .preventDefault() here
-     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         let user_id = user.id;
@@ -45,16 +38,6 @@ const Comment = (props) => {
          */
 
         setComment(event.target.value);
-        // const allowed_names = ["comment"],
-        //     name = event.target.name,
-        //     value = event.target.value;
-
-        // if (-1 !== allowed_names.indexOf(name)) {
-        //     setValues((prev_values) => {
-
-        //         return { ...prev_values, [name]: value };
-        //     });
-        // }
     };
     const content = user ? (
         <>
@@ -88,7 +71,7 @@ const Comment = (props) => {
             </Form>
         </>
     ) : (
-        <Alert variant="danger">
+        <Alert variant="danger" className="mt-2">
             <Alert.Heading>Wait a minute</Alert.Heading>
             <p>
                 You must be registered and logged in to post comments on routes
