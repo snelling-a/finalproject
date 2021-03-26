@@ -34,12 +34,41 @@ function BigMap(props) {
     function Map() {
         const [selectedPoint, setSelectedPoint] = useState(null);
 
+        //wip
+        const [currentPosition, setCurrentPosition] = useState({});
+
+        const success = (position) => {
+            const currentPosition = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            setCurrentPosition(currentPosition);
+        };
+
+        useEffect(() => {
+            navigator.geolocation.getCurrentPosition(success);
+        });
+        //wip
+
         return (
             <GoogleMap
                 defaultZoom={6}
                 defaultCenter={{ lat: 49.81, lng: 15.47 }}
                 mapTypeId={"roadmap"}
             >
+                {currentPosition.lat && (
+                    <Marker
+                        position={currentPosition}
+                        icon={{
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 7,
+                            fillOpacity: 0.65,
+                            strokeWeight: 1.4,
+                            fillColor: "#5384ED",
+                            strokeColor: "#ffffff",
+                        }}
+                    />
+                )}
                 {points &&
                     points.map((point, index) => {
                         if (point.category == "easy") {
