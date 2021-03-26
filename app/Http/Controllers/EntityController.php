@@ -37,7 +37,7 @@ class EntityController extends Controller
             'description' => 'required|min:0|max:250',
             'coords' => 'required',
             'category' => 'required',
-
+            'rating' => 'required|numeric',
         ]);
 
         // create entity in DB
@@ -47,7 +47,7 @@ class EntityController extends Controller
         $entity->photo =  $request->photo;
         $entity->description = $request->description;
         $entity->category = $request->category;
-
+        $entity->rating = $request->rating;
         $entity->coordinates = json_encode($request->coords);
 
 

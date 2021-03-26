@@ -15,7 +15,8 @@ class Entity extends Model
         'photo',
         'description',
         'coordinates',
-        'category'
+        'category',
+        'rating'
     ];
 
     public function comments()

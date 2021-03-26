@@ -10,12 +10,15 @@ import {
 import { UserContext } from "../../Hike";
 import { Link, Redirect } from "react-router-dom";
 import regions from "../../assets/regions.json";
+import RangeSlider from "react-bootstrap-range-slider";
 
 function EntitySubmit() {
     // state section
     const [file, setFile] = useState(null);
     const [status, setStatus] = useState("No file selected");
     const [errors, setErrors] = useState(null);
+    const [rating, setRating] = useState(3);
+
     const [validated, setValidated] = useState(false);
     const [{ name, region, photo, description, category }, setData] = useState({
         name: "",
@@ -75,6 +78,7 @@ function EntitySubmit() {
                 description,
                 coords,
                 category,
+                rating,
             };
 
             // all form data to POST
@@ -135,7 +139,7 @@ function EntitySubmit() {
                 return { ...prev_values, [name]: value };
             });
         }
-        console.log(name, region, photo, description, category);
+        console.log(name, rating);
     };
 
     return (
@@ -236,6 +240,24 @@ function EntitySubmit() {
 
                         <Form.Control.Feedback type="invalid">
                             Please provide a description.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group controlId="rating">
+                        <Form.Label>Rating</Form.Label>
+
+                        <RangeSlider
+                            // name="rating"
+                            value={rating}
+                            min={0}
+                            max={5}
+                            step={1}
+                            variant="success"
+                            tooltip="auto"
+                            tooltipPlacement="bottom"
+                            onChange={(event) => setRating(event.target.value)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a rating.
                         </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="file">

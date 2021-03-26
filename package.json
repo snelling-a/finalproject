@@ -34,6 +34,7 @@
         "moment": "^2.29.1",
         "react-bootstrap": "^1.5.2",
         "react-bootstrap-icons": "^1.4.0",
+        "react-bootstrap-range-slider": "^2.0.2",
         "react-google-maps": "^9.4.5",
         "react-moment": "^1.1.1",
         "react-open-weather": "^1.1.1",
