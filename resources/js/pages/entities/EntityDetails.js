@@ -12,7 +12,7 @@ import {
 import { Heart, HeartFill, MapFill, StarFill } from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Weather from "../../components/Weather";
 import Comment from "../../components/Comment";
 import { UserContext } from "../../Hike";
@@ -54,7 +54,9 @@ const EntityDetails = () => {
 
     const popOver = (
         <Popover id="popover-basic">
-            <Popover.Content>Please register to add favorites!</Popover.Content>
+            <Popover.Content>
+                Please <Link to="/register">register</Link> to add favorites!
+            </Popover.Content>
         </Popover>
     );
     async function handleFavorite() {
@@ -153,15 +155,6 @@ const EntityDetails = () => {
 
                 <Tab eventKey="reviews" title="Reviews">
                     <Container className="px-0">
-                        {/*                     
-                        <Row>
-                            <Col>
-                                <h3>Username</h3>
-                            </Col>
-                            <Col sm={8}>
-                                <h3>Review</h3>
-                            </Col>
-                        </Row> */}
                         {entity.comments &&
                             entity.comments.map((comment) => (
                                 <Row
